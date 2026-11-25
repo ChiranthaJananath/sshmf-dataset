@@ -1,0 +1,51 @@
+{
+  "run_id": "20261001-185901",
+  "exp": "e1",
+  "argv": [
+    "bench.py",
+    "e1",
+    "--local-only",
+    "--n",
+    "200"
+  ],
+  "seed": 20260929,
+  "modes": [
+    [
+      "closed",
+      "interleaved",
+      1
+    ]
+  ],
+  "conditions": {
+    "local_cli_version": "docker --context default version --format {{.Server.Version}}",
+    "local_cli_ps": "docker --context default ps",
+    "local_cli_inspect": "docker --context default inspect sshmf-probe",
+    "local_api_ps": "curl -sS --unix-socket /var/run/docker.sock http://localhost/containers/json",
+    "local_api_inspect": "curl -sS --unix-socket /var/run/docker.sock http://localhost/containers/sshmf-probe/json"
+  },
+  "start": {
+    "time_utc": "2026-10-01T18:59:01Z",
+    "host": "DCI",
+    "docker": "29.8.2/29.8.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.19, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.17.0-1022-azure",
+    "loadavg": "0.11 0.14 0.09 1/313 105458",
+    "governor": "performance",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64"
+  },
+  "status": "complete",
+  "end": {
+    "time_utc": "2026-10-01T19:00:36Z",
+    "host": "DCI",
+    "docker": "29.8.2/29.8.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.19, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.17.0-1022-azure",
+    "loadavg": "0.58 0.30 0.15 1/312 111612",
+    "governor": "performance",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64"
+  }
+}

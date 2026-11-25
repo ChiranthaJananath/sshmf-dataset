@@ -1,0 +1,51 @@
+{
+  "run_id": "20261001-190108",
+  "exp": "e5",
+  "argv": [
+    "bench.py",
+    "e5",
+    "--local-only",
+    "--only",
+    "local_logs_1000,local_logs_10000,local_logs_100000",
+    "--n",
+    "15"
+  ],
+  "seed": 20260929,
+  "modes": [
+    [
+      "closed",
+      "interleaved",
+      1
+    ]
+  ],
+  "conditions": {
+    "local_logs_1000": "docker --context default logs --tail 1000 sshmf-logs",
+    "local_logs_10000": "docker --context default logs --tail 10000 sshmf-logs",
+    "local_logs_100000": "docker --context default logs --tail 100000 sshmf-logs"
+  },
+  "start": {
+    "time_utc": "2026-10-01T19:01:08Z",
+    "host": "DCI",
+    "docker": "29.8.2/29.8.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.19, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.17.0-1022-azure",
+    "loadavg": "0.41 0.28 0.15 1/314 111730",
+    "governor": "performance",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64"
+  },
+  "status": "complete",
+  "end": {
+    "time_utc": "2026-10-01T19:01:41Z",
+    "host": "DCI",
+    "docker": "29.8.2/29.8.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.19, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.17.0-1022-azure",
+    "loadavg": "1.79 0.62 0.27 1/314 112201",
+    "governor": "performance",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64"
+  }
+}

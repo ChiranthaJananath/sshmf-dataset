@@ -1,0 +1,71 @@
+{
+  "run_id": "20261001-221900",
+  "exp": "e5",
+  "argv": [
+    "bench.py",
+    "e5",
+    "--target",
+    "botan"
+  ],
+  "seed": 20260929,
+  "modes": [
+    [
+      "closed",
+      "interleaved",
+      1
+    ]
+  ],
+  "conditions": {
+    "ts_logs_50": "docker --context sshmf-botan-ts logs --tail 50 sshmf-logs",
+    "cm_logs_50": "docker --context sshmf-botan-cm logs --tail 50 sshmf-logs",
+    "ts_logs_200": "docker --context sshmf-botan-ts logs --tail 200 sshmf-logs",
+    "cm_logs_200": "docker --context sshmf-botan-cm logs --tail 200 sshmf-logs",
+    "ts_logs_1000": "docker --context sshmf-botan-ts logs --tail 1000 sshmf-logs",
+    "cm_logs_1000": "docker --context sshmf-botan-cm logs --tail 1000 sshmf-logs",
+    "ts_logs_5000": "docker --context sshmf-botan-ts logs --tail 5000 sshmf-logs",
+    "cm_logs_5000": "docker --context sshmf-botan-cm logs --tail 5000 sshmf-logs",
+    "ts_logs_10000": "docker --context sshmf-botan-ts logs --tail 10000 sshmf-logs",
+    "cm_logs_10000": "docker --context sshmf-botan-cm logs --tail 10000 sshmf-logs",
+    "ts_logs_50000": "docker --context sshmf-botan-ts logs --tail 50000 sshmf-logs",
+    "cm_logs_50000": "docker --context sshmf-botan-cm logs --tail 50000 sshmf-logs",
+    "ts_logs_100000": "docker --context sshmf-botan-ts logs --tail 100000 sshmf-logs",
+    "cm_logs_100000": "docker --context sshmf-botan-cm logs --tail 100000 sshmf-logs",
+    "ts_logs_500000": "docker --context sshmf-botan-ts logs --tail 500000 sshmf-logs",
+    "cm_logs_500000": "docker --context sshmf-botan-cm logs --tail 500000 sshmf-logs"
+  },
+  "start": {
+    "time_utc": "2026-10-01T22:19:00Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.20 0.23 0.23 1/1573 3994482",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "botan",
+    "target_docker": "29.5.2",
+    "target_loadavg": "3.24 2.79 2.42 2/859 1657001",
+    "tailscale_ping": "pong from botan (<redacted-ip>) via <redacted-ip>:41641 in 1ms",
+    "clock_offset_ms_lower_bound": 1.21
+  },
+  "status": "complete",
+  "end": {
+    "time_utc": "2026-10-01T22:29:49Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.55 0.38 0.31 1/1598 4006781",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "botan",
+    "target_docker": "29.5.2",
+    "target_loadavg": "3.31 4.10 3.47 2/868 1693337",
+    "tailscale_ping": "pong from botan (<redacted-ip>) via <redacted-ip>:41641 in 1ms",
+    "clock_offset_ms_lower_bound": 1.37
+  }
+}

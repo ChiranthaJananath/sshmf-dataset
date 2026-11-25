@@ -1,0 +1,61 @@
+{
+  "run_id": "20261002-091621",
+  "exp": "pam",
+  "argv": [
+    "bench.py",
+    "pam",
+    "--target",
+    "ume"
+  ],
+  "seed": 20260929,
+  "modes": [
+    [
+      "closed",
+      "interleaved",
+      1
+    ]
+  ],
+  "conditions": {
+    "pam_ssh_true": "ssh sshmf-ume-ts true",
+    "nopam_ssh_true": "ssh sshmf-ume-nopam true",
+    "pam_ssh_phases": "ssh -v sshmf-ume-ts true",
+    "nopam_ssh_phases": "ssh -v sshmf-ume-nopam true",
+    "pam_ctx_ps": "docker --context sshmf-ume-ts ps",
+    "nopam_ctx_ps": "docker -H ssh://sshmf-ume-nopam ps"
+  },
+  "start": {
+    "time_utc": "2026-10-02T09:16:21Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.02 0.05 0.07 1/1608 198944",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "ume",
+    "target_docker": "29.3.1",
+    "target_loadavg": "0.09 0.09 0.12 1/1830 2945335",
+    "tailscale_ping": "pong from ume (<redacted-ip>) via <redacted-ip>:41641 in 1ms",
+    "clock_offset_ms_lower_bound": 1.97
+  },
+  "status": "complete",
+  "end": {
+    "time_utc": "2026-10-02T09:25:42Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.22 0.26 0.18 1/1624 210218",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "ume",
+    "target_docker": "29.3.1",
+    "target_loadavg": "0.31 0.44 0.31 1/1869 3101885",
+    "tailscale_ping": "pong from ume (<redacted-ip>) via <redacted-ip>:41641 in 1ms",
+    "clock_offset_ms_lower_bound": -0.11
+  }
+}

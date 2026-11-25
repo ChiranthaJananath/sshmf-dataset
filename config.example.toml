@@ -1,0 +1,50 @@
+# SSH-MF harness configuration. Fill in your own hosts before running.
+# Controller = the host that runs bench.py; target = --target <name>.
+
+[ssh]
+user = "your-user"
+port = 22
+
+[hosts.kiri]            # controller in the forward direction
+ts_ip  = "192.0.2.10"   # address on the overlay or LAN (documentation range, replace)
+lan_ip = "192.0.2.11"
+
+[hosts.ume]             # target in the forward direction
+ts_ip  = "192.0.2.20"
+lan_ip = "192.0.2.21"
+
+[hosts.botan]
+ts_ip  = "192.0.2.30"
+
+[hosts.keyaki]
+ts_ip  = "192.0.2.40"
+
+[hosts.sugi]
+ts_ip  = "192.0.2.50"
+
+[hosts.dci]             # cloud VM reached over the public Internet
+ts_ip = "198.51.100.10"
+tailnet = false
+daemon_name = "DCI"
+ssh_user = "your-cloud-user"
+ssh_port = 22
+
+[containers]
+image     = "alpine:3.20"
+probe     = "sshmf-probe"
+logs      = "sshmf-logs"
+log_lines = 600000
+
+[run]
+data_dir = "data/raw"
+warmup   = 5
+seed     = 20260929
+closed_gap_s = 0.05
+random_gap_s = [0.05, 1.05]
+extra_targets = ["botan", "keyaki", "sugi", "dci"]
+
+[tls]
+port = 2376
+
+[fleet]
+base_port = 22100

@@ -1,0 +1,59 @@
+{
+  "run_id": "20261002-004104",
+  "exp": "e3",
+  "argv": [
+    "bench.py",
+    "e3",
+    "--target",
+    "keyaki"
+  ],
+  "seed": 20260929,
+  "modes": [
+    [
+      "closed",
+      "interleaved",
+      1
+    ]
+  ],
+  "conditions": {
+    "ssh_true": "ssh sshmf-keyaki-ts true",
+    "ssh_phases": "ssh -v sshmf-keyaki-ts true",
+    "ctx_ps": "docker --context sshmf-keyaki-ts ps",
+    "ctx_inspect": "docker --context sshmf-keyaki-ts inspect sshmf-probe"
+  },
+  "start": {
+    "time_utc": "2026-10-02T00:41:04Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.06 0.05 0.02 1/1455 4083175",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "keyaki",
+    "target_docker": "28.0.4",
+    "target_loadavg": "0.00 0.01 0.00 1/977 2643729",
+    "tailscale_ping": "pong from keyaki (<redacted-ip>) via <redacted-ip>:41641 in 1ms",
+    "clock_offset_ms_lower_bound": 12.89
+  },
+  "status": "complete",
+  "end": {
+    "time_utc": "2026-10-02T01:03:51Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.26 0.28 0.27 1/1441 4117090",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "keyaki",
+    "target_docker": "28.0.4",
+    "target_loadavg": "0.28 0.37 0.28 1/986 2695787",
+    "tailscale_ping": "pong from keyaki (<redacted-ip>) via <redacted-ip>:41641 in 1ms",
+    "clock_offset_ms_lower_bound": 9.38
+  }
+}

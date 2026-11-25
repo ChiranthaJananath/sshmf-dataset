@@ -1,0 +1,62 @@
+{
+  "run_id": "20261001-183846",
+  "exp": "e4",
+  "argv": [
+    "bench.py",
+    "e4",
+    "--target",
+    "dci",
+    "--only",
+    "cm_version,cm_ps,cm_inspect",
+    "--n",
+    "200"
+  ],
+  "seed": 20260929,
+  "modes": [
+    [
+      "closed",
+      "interleaved",
+      1
+    ]
+  ],
+  "conditions": {
+    "cm_version": "docker --context sshmf-dci-cm version --format {{.Server.Version}}",
+    "cm_ps": "docker --context sshmf-dci-cm ps",
+    "cm_inspect": "docker --context sshmf-dci-cm inspect sshmf-probe"
+  },
+  "start": {
+    "time_utc": "2026-10-01T18:38:46Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.31 0.15 0.05 1/1593 3813088",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "dci",
+    "target_docker": "29.8.2",
+    "target_loadavg": "0.00 0.00 0.00 1/310 94871",
+    "tailscale_ping": "no matching peer",
+    "clock_offset_ms_lower_bound": -20.79
+  },
+  "status": "complete",
+  "end": {
+    "time_utc": "2026-10-01T18:42:49Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.17 0.17 0.08 1/1603 3822522",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "dci",
+    "target_docker": "29.8.2",
+    "target_loadavg": "0.14 0.14 0.06 1/315 100793",
+    "tailscale_ping": "no matching peer",
+    "clock_offset_ms_lower_bound": -20.6
+  }
+}

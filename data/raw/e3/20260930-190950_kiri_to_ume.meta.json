@@ -1,0 +1,59 @@
+{
+  "run_id": "20260930-190950",
+  "exp": "e3",
+  "argv": [
+    "bench.py",
+    "e3",
+    "--target",
+    "ume"
+  ],
+  "seed": 20260929,
+  "modes": [
+    [
+      "closed",
+      "interleaved",
+      1
+    ]
+  ],
+  "conditions": {
+    "ssh_true": "ssh sshmf-ume-ts true",
+    "ssh_phases": "ssh -v sshmf-ume-ts true",
+    "ctx_ps": "docker --context sshmf-ume-ts ps",
+    "ctx_inspect": "docker --context sshmf-ume-ts inspect sshmf-probe"
+  },
+  "start": {
+    "time_utc": "2026-09-30T19:09:50Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.19 0.08 0.08 1/1305 3132777",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "ume",
+    "target_docker": "29.3.1",
+    "target_loadavg": "0.42 0.32 0.28 1/5352 2219626",
+    "tailscale_ping": "pong from ume (<redacted-ip>) via <redacted-ip>:41641 in 1ms",
+    "clock_offset_ms_lower_bound": 1.11
+  },
+  "status": "complete",
+  "end": {
+    "time_utc": "2026-09-30T19:33:08Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.23 0.25 0.20 1/1300 3167313",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "ume",
+    "target_docker": "29.3.1",
+    "target_loadavg": "0.39 0.54 0.51 1/5370 2689830",
+    "tailscale_ping": "pong from ume (<redacted-ip>) via <redacted-ip>:41641 in 1ms",
+    "clock_offset_ms_lower_bound": 2.27
+  }
+}

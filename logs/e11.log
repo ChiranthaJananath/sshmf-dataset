@@ -1,0 +1,41 @@
+nohup: ignoring input
+E11 (D6): 100 hosts, 6 pairs ['keep', 'd6', 'd6', 'keep', 'keep', 'd6'], poll 300 s, idle 300 s, release after 60 s; ~69 min
+  [01:36:20] samplers_started   
+  [01:36:20] prepare 1 keep closed in 68.4 ms
+  [01:36:21] opened 1 keep 444 ms
+  [01:37:21] poll_start 1 keep 
+  [01:42:21] idle_start 1 keep 300 cycles
+  [01:47:21] resume 1 keep 190 ms
+  [01:47:27] pair_end 1 keep 
+  [01:47:27] prepare 2 d6 closed in 66.5 ms
+  [01:48:27] poll_start 2 d6 
+  [01:53:27] idle_start 2 d6 300 cycles
+  [01:54:27] released 2 d6 closed in 59.6 ms
+  [01:58:27] resume 2 d6 452 ms
+  [01:58:33] pair_end 2 d6 
+  [01:58:33] prepare 3 d6 closed in 67.6 ms
+  [01:59:33] poll_start 3 d6 
+  [02:04:33] idle_start 3 d6 300 cycles
+  [02:05:33] released 3 d6 closed in 55.8 ms
+  [02:09:34] resume 3 d6 449 ms
+  [02:09:40] pair_end 3 d6 
+  [02:09:40] prepare 4 keep closed in 66.5 ms
+  [02:09:40] opened 4 keep 414 ms
+  [02:10:40] poll_start 4 keep 
+  [02:15:40] idle_start 4 keep 300 cycles
+  [02:20:40] resume 4 keep 178 ms
+  [02:20:46] pair_end 4 keep 
+  [02:20:46] prepare 5 keep closed in 62.3 ms
+  [02:20:47] opened 5 keep 425 ms
+  [02:21:47] poll_start 5 keep 
+  [02:26:47] idle_start 5 keep 300 cycles
+  [02:31:47] resume 5 keep 187 ms
+  [02:31:53] pair_end 5 keep 
+  [02:31:53] prepare 6 d6 closed in 66.5 ms
+  [02:32:53] poll_start 6 d6 
+  [02:37:53] idle_start 6 d6 300 cycles
+  [02:38:53] released 6 d6 closed in 70.6 ms
+  [02:42:53] resume 6 d6 448 ms
+  [02:42:59] pair_end 6 d6 
+  [02:42:59] closing   closed in 59.3 ms
+done (complete). Send me: results/sshmf_e11_20261019-013608.tar.gz

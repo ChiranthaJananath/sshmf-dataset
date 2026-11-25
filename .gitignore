@@ -1,0 +1,9 @@
+# private configuration with real addresses and user names
+config.toml
+# run state, result bundles, trial runs, caches
+.state/
+results/
+data/quick/
+data/e10_quick/
+__pycache__/
+.DS_Store

@@ -1,0 +1,52 @@
+{
+  "run_id": "20261002-102659",
+  "exp": "e5",
+  "argv": [
+    "bench.py",
+    "e5",
+    "--local-only"
+  ],
+  "seed": 20260929,
+  "modes": [
+    [
+      "closed",
+      "interleaved",
+      1
+    ]
+  ],
+  "conditions": {
+    "local_logs_50": "docker --context default logs --tail 50 sshmf-logs",
+    "local_logs_200": "docker --context default logs --tail 200 sshmf-logs",
+    "local_logs_1000": "docker --context default logs --tail 1000 sshmf-logs",
+    "local_logs_5000": "docker --context default logs --tail 5000 sshmf-logs",
+    "local_logs_10000": "docker --context default logs --tail 10000 sshmf-logs",
+    "local_logs_50000": "docker --context default logs --tail 50000 sshmf-logs",
+    "local_logs_100000": "docker --context default logs --tail 100000 sshmf-logs",
+    "local_logs_500000": "docker --context default logs --tail 500000 sshmf-logs"
+  },
+  "start": {
+    "time_utc": "2026-10-02T01:26:59Z",
+    "host": "keyaki",
+    "docker": "28.0.4/28.0.4",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.2p1 Debian-2+deb12u5, OpenSSL 3.0.15 3 Sep 2024",
+    "kernel": "6.1.0-32-amd64",
+    "loadavg": "1.12 2.24 1.52 1/989 2755504",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "/bin/sh: 1: tc: not found"
+  },
+  "status": "complete",
+  "end": {
+    "time_utc": "2026-10-02T01:29:31Z",
+    "host": "keyaki",
+    "docker": "28.0.4/28.0.4",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.2p1 Debian-2+deb12u5, OpenSSL 3.0.15 3 Sep 2024",
+    "kernel": "6.1.0-32-amd64",
+    "loadavg": "2.33 2.44 1.72 2/985 2759517",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "/bin/sh: 1: tc: not found"
+  }
+}

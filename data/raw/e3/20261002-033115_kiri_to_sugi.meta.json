@@ -1,0 +1,59 @@
+{
+  "run_id": "20261002-033115",
+  "exp": "e3",
+  "argv": [
+    "bench.py",
+    "e3",
+    "--target",
+    "sugi"
+  ],
+  "seed": 20260929,
+  "modes": [
+    [
+      "closed",
+      "interleaved",
+      1
+    ]
+  ],
+  "conditions": {
+    "ssh_true": "ssh sshmf-sugi-ts true",
+    "ssh_phases": "ssh -v sshmf-sugi-ts true",
+    "ctx_ps": "docker --context sshmf-sugi-ts ps",
+    "ctx_inspect": "docker --context sshmf-sugi-ts inspect sshmf-probe"
+  },
+  "start": {
+    "time_utc": "2026-10-02T03:31:15Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.00 0.01 0.01 2/1421 62203",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "sugi",
+    "target_docker": "28.0.4",
+    "target_loadavg": "0.00 0.00 0.00 1/628 3972714",
+    "tailscale_ping": "pong from sugi (<redacted-ip>) via <redacted-ip>:41641 in 1ms",
+    "clock_offset_ms_lower_bound": 15.03
+  },
+  "status": "complete",
+  "end": {
+    "time_utc": "2026-10-02T03:50:04Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.22 0.30 0.22 1/1456 95649",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "sugi",
+    "target_docker": "28.0.4",
+    "target_loadavg": "0.36 0.36 0.27 1/634 4026332",
+    "tailscale_ping": "pong from sugi (<redacted-ip>) via <redacted-ip>:41641 in 1ms",
+    "clock_offset_ms_lower_bound": 13.15
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "run_id": "20261001-184354",
+  "exp": "e5",
+  "argv": [
+    "bench.py",
+    "e5",
+    "--target",
+    "dci",
+    "--only",
+    "ts_logs_1000,ts_logs_10000,ts_logs_100000,cm_logs_1000,cm_logs_10000,cm_logs_100000",
+    "--n",
+    "15",
+    "--pace",
+    "7"
+  ],
+  "seed": 20260929,
+  "modes": [
+    [
+      "closed",
+      "interleaved",
+      1
+    ]
+  ],
+  "conditions": {
+    "ts_logs_1000": "docker --context sshmf-dci-ts logs --tail 1000 sshmf-logs",
+    "cm_logs_1000": "docker --context sshmf-dci-cm logs --tail 1000 sshmf-logs",
+    "ts_logs_10000": "docker --context sshmf-dci-ts logs --tail 10000 sshmf-logs",
+    "cm_logs_10000": "docker --context sshmf-dci-cm logs --tail 10000 sshmf-logs",
+    "ts_logs_100000": "docker --context sshmf-dci-ts logs --tail 100000 sshmf-logs",
+    "cm_logs_100000": "docker --context sshmf-dci-cm logs --tail 100000 sshmf-logs"
+  },
+  "start": {
+    "time_utc": "2026-10-01T18:43:54Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.09 0.15 0.08 2/1602 3822721",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "dci",
+    "target_docker": "29.8.2",
+    "target_loadavg": "0.04 0.11 0.05 1/314 101001",
+    "tailscale_ping": "no matching peer",
+    "clock_offset_ms_lower_bound": -20.63
+  },
+  "status": "complete",
+  "end": {
+    "time_utc": "2026-10-01T18:57:55Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.01 0.08 0.08 1/1606 3826421",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "dci",
+    "target_docker": "29.8.2",
+    "target_loadavg": "0.34 0.17 0.09 1/313 105287",
+    "tailscale_ping": "no matching peer",
+    "clock_offset_ms_lower_bound": -20.48
+  }
+}

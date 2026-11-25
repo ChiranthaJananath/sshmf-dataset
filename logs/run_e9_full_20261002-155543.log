@@ -1,0 +1,152 @@
+== E9 (full) hosts=ume,botan,keyaki,sugi blocks=10 min period=10s faults~60s; log logs/run_e9_full_20261002-155543.log
+   all contexts answer
+
+== [15:55:46] e9_fast_naive_b1 (period 10s)
+E9 naive block fast1: 4 hosts, period 10.0s, 10.0 min
+  cycle    0 makespan   9378.5 ms  late     0.0 ms  open faults 0
+  cycle   10 makespan   8153.2 ms  late     0.1 ms  open faults 0
+  cycle   20 makespan   8071.7 ms  late     0.2 ms  open faults 0
+  cycle   30 makespan  10068.6 ms  late     0.1 ms  open faults 0
+  cycle   40 makespan   8000.7 ms  late     0.2 ms  open faults 1
+  cycle   50 makespan   8150.1 ms  late     0.1 ms  open faults 0
+done: 60 cycles, controller CPU 25.99 s
+
+== [16:06:27] e9_fast_v2_b1 (period 1s)
+E9 v2 block fast1: 4 hosts, period 1.0s, 10.0 min
+  cycle    0 makespan    400.4 ms  late     0.0 ms  open faults 0
+  cycle   10 makespan     96.1 ms  late     0.2 ms  open faults 0
+  cycle   20 makespan    100.0 ms  late     0.2 ms  open faults 0
+  cycle   30 makespan    361.2 ms  late     0.2 ms  open faults 0
+  cycle   40 makespan     72.3 ms  late     0.2 ms  open faults 0
+  cycle   50 makespan     87.9 ms  late     0.1 ms  open faults 0
+  cycle   60 makespan    129.3 ms  late     0.2 ms  open faults 0
+  cycle   70 makespan     94.8 ms  late     0.3 ms  open faults 0
+  cycle   80 makespan    102.2 ms  late     0.1 ms  open faults 0
+  cycle   90 makespan    117.3 ms  late     0.2 ms  open faults 0
+  cycle  100 makespan     91.7 ms  late     0.2 ms  open faults 0
+  cycle  110 makespan     88.0 ms  late     0.1 ms  open faults 0
+  cycle  120 makespan    118.2 ms  late     0.2 ms  open faults 0
+  cycle  130 makespan     99.9 ms  late     0.1 ms  open faults 0
+  cycle  140 makespan    100.6 ms  late     0.2 ms  open faults 0
+  cycle  150 makespan    116.6 ms  late     0.2 ms  open faults 0
+  cycle  160 makespan     87.6 ms  late     0.2 ms  open faults 0
+  cycle  170 makespan   2254.7 ms  late     0.2 ms  open faults 1
+  cycle  180 makespan    113.9 ms  late     0.2 ms  open faults 0
+  cycle  190 makespan     84.5 ms  late     0.2 ms  open faults 0
+  cycle  200 makespan     82.6 ms  late     0.2 ms  open faults 0
+  cycle  210 makespan    118.5 ms  late     0.2 ms  open faults 0
+  cycle  220 makespan     87.7 ms  late     0.2 ms  open faults 0
+  cycle  230 makespan    129.1 ms  late     0.3 ms  open faults 0
+  cycle  240 makespan    121.5 ms  late     0.1 ms  open faults 0
+  cycle  250 makespan     90.5 ms  late     0.2 ms  open faults 0
+  cycle  260 makespan     88.6 ms  late     0.2 ms  open faults 0
+  cycle  270 makespan    117.2 ms  late     0.2 ms  open faults 0
+  cycle  280 makespan     82.8 ms  late     0.2 ms  open faults 0
+  cycle  290 makespan     96.4 ms  late     0.2 ms  open faults 0
+  cycle  300 makespan    118.6 ms  late     0.2 ms  open faults 0
+  cycle  310 makespan     97.2 ms  late     0.2 ms  open faults 0
+  cycle  320 makespan     91.7 ms  late     0.2 ms  open faults 0
+  cycle  330 makespan    121.5 ms  late     0.2 ms  open faults 0
+  cycle  340 makespan     97.9 ms  late     0.2 ms  open faults 0
+  cycle  350 makespan     79.3 ms  late     0.2 ms  open faults 0
+  cycle  360 makespan    116.9 ms  late     0.2 ms  open faults 0
+  cycle  370 makespan     94.1 ms  late     0.2 ms  open faults 0
+  cycle  380 makespan     94.6 ms  late     0.2 ms  open faults 0
+  cycle  390 makespan    113.5 ms  late     0.2 ms  open faults 0
+  cycle  400 makespan     94.2 ms  late     0.1 ms  open faults 0
+  cycle  410 makespan     94.6 ms  late     0.2 ms  open faults 0
+  cycle  420 makespan    124.8 ms  late     0.1 ms  open faults 0
+  cycle  430 makespan     89.3 ms  late     0.2 ms  open faults 0
+  cycle  440 makespan     87.0 ms  late     0.2 ms  open faults 0
+  cycle  450 makespan    114.3 ms  late     0.2 ms  open faults 0
+  cycle  460 makespan     95.9 ms  late     0.2 ms  open faults 0
+  cycle  470 makespan     87.7 ms  late     0.2 ms  open faults 0
+  cycle  480 makespan    357.2 ms  late     0.2 ms  open faults 0
+  cycle  490 makespan     81.0 ms  late     0.2 ms  open faults 0
+  cycle  500 makespan     92.8 ms  late     0.2 ms  open faults 0
+  cycle  510 makespan    121.4 ms  late     0.1 ms  open faults 0
+  cycle  520 makespan     88.9 ms  late     0.2 ms  open faults 0
+  cycle  530 makespan     94.4 ms  late     0.2 ms  open faults 0
+  cycle  540 makespan    117.3 ms  late     0.2 ms  open faults 0
+  cycle  550 makespan     76.6 ms  late     0.1 ms  open faults 0
+  cycle  560 makespan     80.5 ms  late     0.2 ms  open faults 0
+  cycle  570 makespan    117.4 ms  late     0.2 ms  open faults 0
+  cycle  580 makespan     91.8 ms  late     0.1 ms  open faults 0
+  cycle  590 makespan     83.7 ms  late     0.2 ms  open faults 0
+done: 599 cycles, controller CPU 26.92 s
+
+== [16:17:01] e9_fast_v2_b2 (period 1s)
+E9 v2 block fast2: 4 hosts, period 1.0s, 10.0 min
+  cycle    0 makespan    353.7 ms  late     0.0 ms  open faults 0
+  cycle   10 makespan    102.2 ms  late     0.2 ms  open faults 0
+  cycle   20 makespan     84.1 ms  late     0.2 ms  open faults 0
+  cycle   30 makespan    116.7 ms  late     0.2 ms  open faults 0
+  cycle   40 makespan     94.9 ms  late     0.2 ms  open faults 0
+  cycle   50 makespan     85.3 ms  late     0.2 ms  open faults 0
+  cycle   60 makespan    120.1 ms  late     0.1 ms  open faults 0
+  cycle   70 makespan     84.7 ms  late     0.2 ms  open faults 0
+  cycle   80 makespan     94.4 ms  late     0.2 ms  open faults 0
+  cycle   90 makespan    111.8 ms  late     0.2 ms  open faults 0
+  cycle  100 makespan     83.6 ms  late     0.2 ms  open faults 0
+  cycle  110 makespan     94.2 ms  late     0.2 ms  open faults 0
+  cycle  120 makespan    112.9 ms  late     0.2 ms  open faults 0
+  cycle  130 makespan     83.1 ms  late     0.2 ms  open faults 0
+  cycle  140 makespan     85.0 ms  late     0.2 ms  open faults 0
+  cycle  150 makespan    116.8 ms  late     0.2 ms  open faults 0
+  cycle  160 makespan     90.1 ms  late     0.2 ms  open faults 0
+  cycle  170 makespan     87.1 ms  late     0.2 ms  open faults 0
+  cycle  180 makespan    116.3 ms  late     0.2 ms  open faults 0
+  cycle  190 makespan     72.1 ms  late     0.2 ms  open faults 0
+  cycle  200 makespan     98.2 ms  late     0.2 ms  open faults 0
+  cycle  210 makespan    122.0 ms  late     0.2 ms  open faults 0
+  cycle  220 makespan    219.4 ms  late     0.2 ms  open faults 1
+  cycle  230 makespan     95.5 ms  late     0.3 ms  open faults 0
+  cycle  240 makespan    114.8 ms  late     0.2 ms  open faults 0
+  cycle  250 makespan     75.9 ms  late     0.2 ms  open faults 0
+  cycle  260 makespan     88.6 ms  late     0.2 ms  open faults 0
+  cycle  270 makespan    200.2 ms  late     0.2 ms  open faults 0
+  cycle  280 makespan     94.6 ms  late     0.2 ms  open faults 0
+  cycle  290 makespan    106.9 ms  late     0.2 ms  open faults 0
+  cycle  300 makespan    120.0 ms  late     0.2 ms  open faults 0
+  cycle  310 makespan     89.8 ms  late     0.2 ms  open faults 0
+  cycle  320 makespan     96.8 ms  late     0.2 ms  open faults 0
+  cycle  330 makespan    127.8 ms  late     0.2 ms  open faults 0
+  cycle  340 makespan     91.7 ms  late     0.2 ms  open faults 0
+  cycle  350 makespan     91.1 ms  late     0.2 ms  open faults 0
+  cycle  360 makespan    117.5 ms  late     0.2 ms  open faults 0
+  cycle  370 makespan     91.1 ms  late     0.2 ms  open faults 0
+  cycle  380 makespan     80.5 ms  late     0.2 ms  open faults 0
+  cycle  390 makespan    110.5 ms  late     0.2 ms  open faults 0
+  cycle  400 makespan     86.4 ms  late     0.2 ms  open faults 0
+  cycle  410 makespan     92.5 ms  late     0.2 ms  open faults 0
+  cycle  420 makespan    116.2 ms  late     0.2 ms  open faults 0
+  cycle  430 makespan     85.8 ms  late     0.2 ms  open faults 0
+  cycle  440 makespan     91.2 ms  late     0.2 ms  open faults 0
+  cycle  450 makespan    112.1 ms  late     0.2 ms  open faults 0
+  cycle  460 makespan     90.6 ms  late     0.2 ms  open faults 0
+  cycle  470 makespan     92.2 ms  late     0.2 ms  open faults 0
+  cycle  480 makespan    118.6 ms  late     0.2 ms  open faults 0
+  cycle  490 makespan     94.1 ms  late     0.2 ms  open faults 0
+  cycle  500 makespan    177.3 ms  late     0.2 ms  open faults 1
+  cycle  510 makespan    119.7 ms  late     0.1 ms  open faults 0
+  cycle  520 makespan     81.7 ms  late     0.2 ms  open faults 0
+  cycle  530 makespan     92.7 ms  late     0.2 ms  open faults 0
+  cycle  540 makespan    113.3 ms  late     0.2 ms  open faults 0
+  cycle  550 makespan     79.7 ms  late     0.2 ms  open faults 0
+  cycle  560 makespan     85.6 ms  late     0.2 ms  open faults 0
+  cycle  570 makespan    120.3 ms  late     0.1 ms  open faults 0
+  cycle  580 makespan     84.4 ms  late     0.2 ms  open faults 0
+  cycle  590 makespan     86.7 ms  late     0.2 ms  open faults 0
+done: 598 cycles, controller CPU 26.61 s
+
+== [16:27:34] e9_fast_naive_b2 (period 10s)
+E9 naive block fast2: 4 hosts, period 10.0s, 10.0 min
+  cycle    0 makespan   9325.9 ms  late     0.0 ms  open faults 0
+  cycle   10 makespan   8044.4 ms  late     0.2 ms  open faults 0
+  cycle   20 makespan   8106.5 ms  late     0.1 ms  open faults 0
+  cycle   30 makespan   9681.4 ms  late     0.2 ms  open faults 0
+  cycle   40 makespan   8240.9 ms  late     0.2 ms  open faults 0
+  cycle   50 makespan   8473.2 ms  late     0.2 ms  open faults 0
+done: 60 cycles, controller CPU 26.05 s
+bundle: results/sshmf_e9_full_fast_20261002-163813.tar.gz
+all blocks completed. Send me: results/sshmf_e9_full_fast_20261002-163813.tar.gz

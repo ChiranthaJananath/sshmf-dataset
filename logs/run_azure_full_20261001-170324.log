@@ -1,0 +1,103 @@
+
+== [17:03:24] Azure paced run (full): pace 7s per new SSH session; log logs/run_azure_full_20261001-170324.log
+
+== [17:03:24] a_setup: aliases, harness copy, contexts, containers on dci (paced)
+wrote /home/<user>/.ssh/config.d/sshmf-dci.conf
+$ ssh sshmf-dci-ts true
+  sshmf-dci-ts: OK
+$ ssh sshmf-dci-cm true
+  sshmf-dci-cm: OK
+$ ssh sshmf-dci-tuned true
+  sshmf-dci-tuned: OK
+   (pause 30s so set-up connections never form a burst)
+   (pause 15s so set-up connections never form a burst)
+$ docker context create sshmf-dci-ts --description SSH-MF ts path to dci --docker host=ssh://sshmf-dci-ts
+  sshmf-dci-ts: server 29.8.2 on daemon host 'DCI'
+$ docker context create sshmf-dci-cm --description SSH-MF cm path to dci --docker host=ssh://sshmf-dci-cm
+  sshmf-dci-cm: server 29.8.2 on daemon host 'DCI'
+$ docker context create sshmf-dci-tuned --description SSH-MF tuned path to dci --docker host=ssh://sshmf-dci-tuned
+  sshmf-dci-tuned: server 29.8.2 on daemon host 'DCI'
+   (pause 30s so set-up connections never form a burst)
+$ docker --context sshmf-dci-ts rm -f sshmf-probe sshmf-logs
+$ docker --context sshmf-dci-ts run -d --name sshmf-probe --label sshmf=1 alpine:3.20 sleep infinity
+$ docker --context sshmf-dci-ts run -d --name sshmf-logs --label sshmf=1 --log-driver json-file --log-opt max-size=2g --log-opt max-file=1 alpine:3.20 sh -c awk 'BEGIN{for(i=0;i<600000;i++) printf "%07d xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n", i}'; sleep infinity
+  sshmf-logs: 600000 lines x 100 B ready
+   (pause 60s so set-up connections never form a burst)
+
+== [17:06:07] a_e1: E1 fresh sessions over the WAN (paced, n=60)
+e1: 390 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e1/20261001-170610_kiri_to_dci.csv
+  1/390  ssh_true 1060.7 ms  elapsed 0.0 min  eta 7.2 min
+  101/390  tuned_ctx_ps 1239.8 ms  elapsed 11.7 min  eta 33.5 min
+  201/390  ctx_ps 1242.6 ms  elapsed 23.4 min  eta 22.0 min
+  301/390  ctx_ps 1242.8 ms  elapsed 35.0 min  eta 10.4 min
+  390/390  tuned_ssh_phases 1031.3 ms  elapsed 45.4 min  eta 0.0 min
+   (pause 60s so set-up connections never form a burst)
+
+== [17:52:44] a_ume_paced: pacing control: same paced E1 conditions on ume (n=60)
+e1: 390 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e1/20261001-175246_kiri_to_ume_paced.csv
+  1/390  ssh_true 269.4 ms  elapsed 0.0 min  eta 2.1 min
+  101/390  tuned_ctx_ps 265.9 ms  elapsed 11.7 min  eta 33.4 min
+  201/390  ctx_ps 298.6 ms  elapsed 23.3 min  eta 21.9 min
+  301/390  ctx_ps 309.8 ms  elapsed 35.0 min  eta 10.4 min
+  390/390  tuned_ssh_phases 228.4 ms  elapsed 45.4 min  eta 0.0 min
+   (pause 30s so set-up connections never form a burst)
+
+== [18:38:43] a_e4_cm: E4 session reuse over the WAN (unpaced, n=200)
+note: context sshmf-dci-lan unreachable, its conditions are skipped
+note: context sshmf-dci-tls unreachable, its conditions are skipped
+e4: 615 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e4/20261001-183846_kiri_to_dci.csv
+  1/615  cm_version 1212.4 ms  elapsed 0.0 min  eta 12.9 min
+  101/615  cm_ps 361.2 ms  elapsed 0.7 min  eta 3.4 min
+  201/615  cm_ps 367.6 ms  elapsed 1.3 min  eta 2.7 min
+  301/615  cm_inspect 319.2 ms  elapsed 2.0 min  eta 2.0 min
+  401/615  cm_ps 358.3 ms  elapsed 2.6 min  eta 1.4 min
+  501/615  cm_version 325.2 ms  elapsed 3.2 min  eta 0.7 min
+  601/615  cm_version 328.0 ms  elapsed 3.9 min  eta 0.1 min
+  615/615  cm_version 322.6 ms  elapsed 4.0 min  eta 0.0 min
+   (pause 60s so set-up connections never form a burst)
+
+== [18:43:54] a_e5: E5 payload over the WAN, fresh vs reused session (paced, n=15)
+e5: 120 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e5/20261001-184354_kiri_to_dci.csv
+  1/120  ts_logs_1000 1497.2 ms  elapsed 0.0 min  eta 3.1 min
+  101/120  cm_logs_100000 1912.5 ms  elapsed 11.7 min  eta 2.2 min
+  120/120  ts_logs_100000 2652.4 ms  elapsed 13.9 min  eta 0.0 min
+   (pause 60s so set-up connections never form a burst)
+
+== [18:58:59] a_e1_local: E1 local baseline on dci
+note: no curl on ume, raw-API conditions are skipped
+note: context sshmf-ume-tuned unreachable, its conditions are skipped
+e1: 1025 calls -> /home/<user>/sshmf-harness/data/raw/e1/20261001-185901_DCI_to_local.csv
+  1/1025  local_cli_version 33.7 ms  elapsed 0.0 min  eta 1.4 min
+  101/1025  local_cli_inspect 26.5 ms  elapsed 0.2 min  eta 1.4 min
+  201/1025  local_api_inspect 9.9 ms  elapsed 0.3 min  eta 1.3 min
+  301/1025  local_cli_version 35.7 ms  elapsed 0.5 min  eta 1.1 min
+  401/1025  local_cli_inspect 29.7 ms  elapsed 0.6 min  eta 1.0 min
+  501/1025  local_cli_version 34.4 ms  elapsed 0.8 min  eta 0.8 min
+  601/1025  local_api_ps 56.9 ms  elapsed 0.9 min  eta 0.7 min
+  701/1025  local_api_ps 47.6 ms  elapsed 1.1 min  eta 0.5 min
+  801/1025  local_api_ps 61.4 ms  elapsed 1.2 min  eta 0.3 min
+  901/1025  local_api_inspect 11.3 ms  elapsed 1.4 min  eta 0.2 min
+  1001/1025  local_api_inspect 11.1 ms  elapsed 1.5 min  eta 0.0 min
+  1025/1025  local_cli_version 37.3 ms  elapsed 1.6 min  eta 0.0 min
+   (pause 30s so set-up connections never form a burst)
+
+== [19:01:06] a_e5_local: E5 local baseline on dci
+e5: 60 calls -> /home/<user>/sshmf-harness/data/raw/e5/20261001-190108_DCI_to_local.csv
+  1/60  local_logs_1000 38.0 ms  elapsed 0.0 min  eta 0.1 min
+  60/60  local_logs_100000 1238.5 ms  elapsed 0.5 min  eta 0.0 min
+   (pause 30s so set-up connections never form a burst)
+
+== [19:02:11] a_rtt: real WAN RTT to dci (TCP connect, 15 samples, paced)
+TCP-connect RTT: min 70.7 median 71.4 ms -> data/raw/azure_rtt/20261001-190211_kiri_to_dci_rtt.csv
+   (pause 150s so set-up connections never form a burst)
+
+== [19:06:27] collect dci data
+
+== [19:06:29] summaries
+  e1 -> results/azure_full_20261001-190629/summary_e1.txt
+  e4 -> results/azure_full_20261001-190629/summary_e4.txt
+  e5 -> results/azure_full_20261001-190629/summary_e5.txt
+bundle: results/sshmf_azure_full_20261001-190629.tar.gz
+
+== [19:06:29] done in 123 min
+all steps completed. Send me: results/sshmf_azure_full_20261001-190629.tar.gz

@@ -1,0 +1,917 @@
+
+== [19:06:29] SSH-MF run_all (full) on kiri, log logs/run_all_full_20261001-190629.log
+
+== [19:06:29] x_botan_setup: aliases, harness copy, contexts, containers, preflight for botan
+wrote /home/<user>/.ssh/config.d/sshmf-botan.conf
+$ ssh sshmf-botan-ts true
+  sshmf-botan-ts: OK
+$ ssh sshmf-botan-lan true
+  sshmf-botan-lan: FAIL ssh: connect to host <redacted-ip> port <ssh-port>: Connection timed out
+$ ssh sshmf-botan-cm true
+  sshmf-botan-cm: OK
+$ ssh sshmf-botan-tuned true
+  sshmf-botan-tuned: OK
+$ docker context create sshmf-botan-ts --description SSH-MF ts path to botan --docker host=ssh://sshmf-botan-ts
+  sshmf-botan-ts: server 29.5.2 on daemon host 'botan'
+$ docker context create sshmf-botan-lan --description SSH-MF lan path to botan --docker host=ssh://sshmf-botan-lan
+  sshmf-botan-lan: FAIL error during connect: Get "http://docker.example.com/v1.54/version": command [ssh -o ConnectTimeout=30 -T -- sshmf-botan-lan docker system dial-stdio] has exited with exit status 255, make sure the URL is valid, and Docker 18.09 or later is installed on the remote host: stderr=ssh: connect to host <redacted-ip> port <ssh-port>: Connection timed out
+$ docker context create sshmf-botan-cm --description SSH-MF cm path to botan --docker host=ssh://sshmf-botan-cm
+  sshmf-botan-cm: server 29.5.2 on daemon host 'botan'
+$ docker context create sshmf-botan-tuned --description SSH-MF tuned path to botan --docker host=ssh://sshmf-botan-tuned
+  sshmf-botan-tuned: server 29.5.2 on daemon host 'botan'
+$ docker --context sshmf-botan-ts rm -f sshmf-probe sshmf-logs
+$ docker --context sshmf-botan-ts run -d --name sshmf-probe --label sshmf=1 alpine:3.20 sleep infinity
+$ docker --context sshmf-botan-ts run -d --name sshmf-logs --label sshmf=1 --log-driver json-file --log-opt max-size=2g --log-opt max-file=1 alpine:3.20 sh -c awk 'BEGIN{for(i=0;i<600000;i++) printf "%07d xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n", i}'; sleep infinity
+  sshmf-logs: 600000 lines x 100 B ready
+[PASS] not running as root                                          1007
+[PASS] ssh alias ts has no multiplexing                             controlmaster false
+[PASS] ssh alias cm multiplexes                                     controlmaster auto
+[PASS] context sshmf-botan-ts reaches daemon 'botan'                botan
+[WARN] context sshmf-botan-lan reaches daemon 'botan' (optional)    error during connect: Get "http://docker.example.com/v1.54/info": command [ssh -o ConnectTimeout=30 -T -- sshm
+[PASS] context sshmf-botan-cm reaches daemon 'botan'                botan
+[PASS] context sshmf-botan-tuned reaches daemon 'botan' (optional)  botan
+[PASS] botan: remote docker CLI uses context 'default'              default
+[PASS] local docker socket (curl)                                   OK
+[PASS] target: curl + docker socket (optional on observe-only)      OK
+[WARN] context sshmf-botan-tls (optional, E4)                       Failed to initialize: unable to resolve docker endpoint: context "sshmf-botan-tls": context not found: open /h
+[PASS] target: python3 >= 3.11                                      3.12.3
+[PASS] target container sshmf-probe running                         true
+[PASS] target container sshmf-logs running                          true
+[PASS] tailscale path is direct                                     pong from botan (<redacted-ip>) via <redacted-ip>:41641 in 1ms
+[PASS] local NTP synchronised                                       yes
+[PASS] target NTP synchronised                                      yes
+[PASS] target fail2ban inactive (E8 single)                         inactive
+[PASS] target sshd MaxStartups (default 10:30:100)                  default
+[PASS] no netem active on tailscale0                                qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32
+[PASS] local load1 < 2                                              0.07 0.04 0.04 1/1617 3828803
+[PASS] target load1 < 2                                             1.50 1.51 1.48 4/864 725207
+
+== [19:10:21] x_botan_e1: E1 alpha decomposition (kiri -> botan)
+e1: 6565 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e1/20261001-191022_kiri_to_botan.csv
+  1/6565  ctx_inspect 428.7 ms  elapsed 0.0 min  eta 52.4 min
+  101/6565  tuned_ctx_ps 536.8 ms  elapsed 0.6 min  eta 41.0 min
+  201/6565  tuned_ssh_phases 387.6 ms  elapsed 1.3 min  eta 39.7 min
+  301/6565  local_cli_version 26.6 ms  elapsed 1.8 min  eta 38.5 min
+  401/6565  local_cli_version 26.2 ms  elapsed 2.5 min  eta 37.8 min
+  501/6565  tuned_ctx_ps 530.7 ms  elapsed 3.1 min  eta 37.5 min
+  601/6565  tuned_ssh_true 232.2 ms  elapsed 3.7 min  eta 37.2 min
+  701/6565  tuned_ssh_true 476.6 ms  elapsed 4.4 min  eta 36.7 min
+  801/6565  ctx_inspect 327.9 ms  elapsed 5.0 min  eta 36.2 min
+  901/6565  ssh_phases 257.6 ms  elapsed 5.7 min  eta 35.6 min
+  1001/6565  local_cli_version 28.5 ms  elapsed 6.3 min  eta 35.1 min
+  1101/6565  tuned_ssh_true 366.7 ms  elapsed 6.9 min  eta 34.4 min
+  1201/6565  local_api_ps 30.1 ms  elapsed 7.6 min  eta 33.8 min
+  1301/6565  ssh_true 265.1 ms  elapsed 8.2 min  eta 33.0 min
+  1401/6565  local_api_ps 31.6 ms  elapsed 8.8 min  eta 32.4 min
+  1501/6565  ssh_true 479.6 ms  elapsed 9.4 min  eta 31.7 min
+  1601/6565  local_api_ps 32.1 ms  elapsed 10.0 min  eta 31.1 min
+  1701/6565  local_api_ps 32.1 ms  elapsed 10.6 min  eta 30.3 min
+  1801/6565  ctx_version 319.9 ms  elapsed 11.3 min  eta 29.8 min
+  1901/6565  local_api_ps 28.7 ms  elapsed 11.9 min  eta 29.1 min
+  2001/6565  ssh_true 510.6 ms  elapsed 12.5 min  eta 28.4 min
+  2101/6565  local_cli_version 28.7 ms  elapsed 13.1 min  eta 27.8 min
+  2201/6565  local_cli_ps 44.4 ms  elapsed 13.7 min  eta 27.1 min
+  2301/6565  local_cli_ps 40.8 ms  elapsed 14.3 min  eta 26.6 min
+  2401/6565  local_cli_version 28.6 ms  elapsed 15.0 min  eta 26.0 min
+  2501/6565  ssh_true 512.3 ms  elapsed 15.6 min  eta 25.3 min
+  2601/6565  ssh_cli_version 297.2 ms  elapsed 16.2 min  eta 24.7 min
+  2701/6565  local_cli_ps 40.2 ms  elapsed 16.8 min  eta 24.1 min
+  2801/6565  ssh_api_ps 342.3 ms  elapsed 17.5 min  eta 23.5 min
+  2901/6565  local_cli_ps 43.5 ms  elapsed 18.1 min  eta 22.8 min
+  3001/6565  tuned_ctx_ps 536.8 ms  elapsed 18.7 min  eta 22.2 min
+  3101/6565  tuned_ctx_ps 534.6 ms  elapsed 19.3 min  eta 21.6 min
+  3201/6565  ctx_version 402.9 ms  elapsed 19.9 min  eta 20.9 min
+  3301/6565  ssh_api_ps 543.1 ms  elapsed 20.6 min  eta 20.4 min
+  3401/6565  local_cli_version 29.9 ms  elapsed 21.2 min  eta 19.7 min
+  3501/6565  tuned_ssh_phases 479.5 ms  elapsed 21.9 min  eta 19.1 min
+  3601/6565  ssh_true 419.4 ms  elapsed 22.5 min  eta 18.5 min
+  3701/6565  local_api_ps 35.2 ms  elapsed 23.1 min  eta 17.9 min
+  3801/6565  ssh_true 271.4 ms  elapsed 23.7 min  eta 17.2 min
+  3901/6565  ctx_version 501.8 ms  elapsed 24.4 min  eta 16.6 min
+  4001/6565  ctx_ps 496.4 ms  elapsed 25.0 min  eta 16.0 min
+  4101/6565  ctx_version 572.3 ms  elapsed 25.6 min  eta 15.4 min
+  4201/6565  tuned_ctx_ps 273.4 ms  elapsed 26.2 min  eta 14.8 min
+  4301/6565  ctx_version 369.6 ms  elapsed 26.8 min  eta 14.1 min
+  4401/6565  ssh_phases 322.7 ms  elapsed 27.5 min  eta 13.5 min
+  4501/6565  tuned_ssh_true 233.0 ms  elapsed 28.1 min  eta 12.9 min
+  4601/6565  local_api_ps 33.6 ms  elapsed 28.7 min  eta 12.3 min
+  4701/6565  local_cli_ps 48.1 ms  elapsed 29.4 min  eta 11.6 min
+  4801/6565  ctx_ps 521.5 ms  elapsed 30.0 min  eta 11.0 min
+  4901/6565  ctx_version 517.3 ms  elapsed 30.7 min  eta 10.4 min
+  5001/6565  local_cli_ps 40.2 ms  elapsed 31.3 min  eta 9.8 min
+  5101/6565  tuned_ssh_true 479.8 ms  elapsed 31.9 min  eta 9.2 min
+  5201/6565  local_cli_ps 46.0 ms  elapsed 32.5 min  eta 8.5 min
+  5301/6565  ssh_phases 272.4 ms  elapsed 33.1 min  eta 7.9 min
+  5401/6565  tuned_ssh_true 387.7 ms  elapsed 33.8 min  eta 7.3 min
+  5501/6565  ssh_true 483.1 ms  elapsed 34.4 min  eta 6.6 min
+  5601/6565  ssh_true 327.9 ms  elapsed 35.0 min  eta 6.0 min
+  5701/6565  local_cli_ps 35.8 ms  elapsed 35.6 min  eta 5.4 min
+  5801/6565  tuned_ssh_phases 222.5 ms  elapsed 36.3 min  eta 4.8 min
+  5901/6565  local_cli_ps 46.2 ms  elapsed 36.9 min  eta 4.1 min
+  6001/6565  tuned_ssh_phases 236.2 ms  elapsed 37.5 min  eta 3.5 min
+  6101/6565  ssh_true 483.4 ms  elapsed 38.1 min  eta 2.9 min
+  6201/6565  local_api_ps 30.9 ms  elapsed 38.7 min  eta 2.3 min
+  6301/6565  local_cli_ps 45.9 ms  elapsed 39.3 min  eta 1.6 min
+  6401/6565  local_cli_version 25.9 ms  elapsed 39.9 min  eta 1.0 min
+  6501/6565  local_api_ps 28.4 ms  elapsed 40.6 min  eta 0.4 min
+  6565/6565  local_api_ps 32.0 ms  elapsed 40.9 min  eta 0.0 min
+
+== [19:51:24] x_botan_e1_local: E1 local baseline on botan
+note: no curl on ume, raw-API conditions are skipped
+note: context sshmf-ume-tuned unreachable, its conditions are skipped
+e1: 2525 calls -> /home/<user>/sshmf-harness/data/raw/e1/20261001-195125_botan_to_local.csv
+  1/2525  local_cli_version 18.3 ms  elapsed 0.0 min  eta 2.9 min
+  101/2525  local_cli_inspect 13.5 ms  elapsed 0.1 min  eta 2.9 min
+  201/2525  local_api_inspect 7.2 ms  elapsed 0.2 min  eta 2.8 min
+  301/2525  local_cli_version 16.0 ms  elapsed 0.4 min  eta 2.7 min
+  401/2525  local_cli_inspect 16.0 ms  elapsed 0.5 min  eta 2.6 min
+  501/2525  local_cli_version 20.2 ms  elapsed 0.6 min  eta 2.4 min
+  601/2525  local_api_ps 19.0 ms  elapsed 0.7 min  eta 2.3 min
+  701/2525  local_api_ps 25.6 ms  elapsed 0.8 min  eta 2.2 min
+  801/2525  local_api_ps 19.3 ms  elapsed 1.0 min  eta 2.1 min
+  901/2525  local_api_inspect 3.6 ms  elapsed 1.1 min  eta 2.0 min
+  1001/2525  local_api_inspect 6.7 ms  elapsed 1.2 min  eta 1.8 min
+  1101/2525  local_cli_version 25.4 ms  elapsed 1.3 min  eta 1.7 min
+  1201/2525  local_api_ps 33.6 ms  elapsed 1.4 min  eta 1.6 min
+  1301/2525  local_api_inspect 8.2 ms  elapsed 1.6 min  eta 1.5 min
+  1401/2525  local_cli_version 18.3 ms  elapsed 1.7 min  eta 1.4 min
+  1501/2525  local_cli_ps 42.4 ms  elapsed 1.8 min  eta 1.2 min
+  1601/2525  local_api_inspect 6.2 ms  elapsed 1.9 min  eta 1.1 min
+  1701/2525  local_cli_inspect 14.9 ms  elapsed 2.0 min  eta 1.0 min
+  1801/2525  local_cli_ps 30.5 ms  elapsed 2.2 min  eta 0.9 min
+  1901/2525  local_cli_inspect 15.4 ms  elapsed 2.3 min  eta 0.7 min
+  2001/2525  local_cli_version 21.5 ms  elapsed 2.4 min  eta 0.6 min
+  2101/2525  local_api_ps 36.1 ms  elapsed 2.5 min  eta 0.5 min
+  2201/2525  local_cli_ps 42.3 ms  elapsed 2.6 min  eta 0.4 min
+  2301/2525  local_cli_inspect 13.2 ms  elapsed 2.8 min  eta 0.3 min
+  2401/2525  local_cli_version 18.9 ms  elapsed 2.9 min  eta 0.1 min
+  2501/2525  local_cli_inspect 15.2 ms  elapsed 3.0 min  eta 0.0 min
+  2525/2525  local_api_inspect 7.4 ms  elapsed 3.0 min  eta 0.0 min
+
+== [19:54:27] x_botan_e2: E2 phase absorption (kiri -> botan)
+e2: 1860 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e2/20261001-195427_kiri_to_botan.csv
+  1/1860  ctx_cli_stats 1378.0 ms  elapsed 0.0 min  eta 44.3 min
+  101/1860  ctx_cli_stats 1955.7 ms  elapsed 3.4 min  eta 58.7 min
+  201/1860  ssh_api_oneshot 537.7 ms  elapsed 4.2 min  eta 35.0 min
+  301/1860  ctx_cli_stats 1955.5 ms  elapsed 7.3 min  eta 38.0 min
+  401/1860  ssh_api_oneshot 276.7 ms  elapsed 8.5 min  eta 30.8 min
+  501/1860  ctx_cli_stats 1953.1 ms  elapsed 11.3 min  eta 30.6 min
+  601/1860  ssh_api_stats 1955.3 ms  elapsed 14.6 min  eta 30.7 min
+  701/1860  ssh_api_stats 1955.3 ms  elapsed 18.0 min  eta 29.7 min
+  801/1860  ssh_api_stats 1956.2 ms  elapsed 21.3 min  eta 28.2 min
+  901/1860  ssh_api_oneshot 507.7 ms  elapsed 23.1 min  eta 24.6 min
+  1001/1860  ctx_cli_stats 1309.5 ms  elapsed 25.0 min  eta 21.5 min
+  1101/1860  ctx_cli_stats 1367.7 ms  elapsed 27.7 min  eta 19.1 min
+  1201/1860  ssh_api_oneshot 396.7 ms  elapsed 30.4 min  eta 16.7 min
+  1301/1860  ssh_api_oneshot 386.2 ms  elapsed 33.2 min  eta 14.3 min
+  1401/1860  ssh_api_oneshot 369.2 ms  elapsed 36.0 min  eta 11.8 min
+  1501/1860  ssh_api_oneshot 286.9 ms  elapsed 38.7 min  eta 9.3 min
+  1601/1860  ssh_api_oneshot 447.7 ms  elapsed 41.5 min  eta 6.7 min
+  1701/1860  ssh_api_oneshot 280.5 ms  elapsed 44.2 min  eta 4.1 min
+  1801/1860  ssh_api_stats 1285.7 ms  elapsed 47.0 min  eta 1.5 min
+  1860/1860  ctx_cli_stats 1381.0 ms  elapsed 48.6 min  eta 0.0 min
+
+== [20:43:09] x_botan_e2_local: E2 local baseline on botan
+note: no curl on ume, raw-API conditions are skipped
+e2: 1860 calls -> /home/<user>/sshmf-harness/data/raw/e2/20261001-204309_botan_to_local.csv
+  1/1860  local_cli_stats 1017.8 ms  elapsed 0.0 min  eta 33.1 min
+  101/1860  local_cli_stats 1957.2 ms  elapsed 3.4 min  eta 58.5 min
+  201/1860  local_api_oneshot 7.7 ms  elapsed 3.6 min  eta 29.6 min
+  301/1860  local_cli_stats 1956.8 ms  elapsed 6.6 min  eta 34.3 min
+  401/1860  local_api_oneshot 10.6 ms  elapsed 7.2 min  eta 26.1 min
+  501/1860  local_cli_stats 1955.9 ms  elapsed 9.9 min  eta 26.8 min
+  601/1860  local_api_stats 1956.3 ms  elapsed 13.2 min  eta 27.7 min
+  701/1860  local_api_stats 1956.2 ms  elapsed 16.6 min  eta 27.4 min
+  801/1860  local_api_stats 1957.3 ms  elapsed 19.9 min  eta 26.3 min
+  901/1860  local_api_oneshot 5.7 ms  elapsed 21.3 min  eta 22.7 min
+  1001/1860  local_cli_stats 1142.1 ms  elapsed 22.7 min  eta 19.5 min
+  1101/1860  local_cli_stats 1023.1 ms  elapsed 25.0 min  eta 17.2 min
+  1201/1860  local_api_oneshot 10.2 ms  elapsed 27.3 min  eta 15.0 min
+  1301/1860  local_api_oneshot 12.3 ms  elapsed 29.8 min  eta 12.8 min
+  1401/1860  local_api_oneshot 9.8 ms  elapsed 32.1 min  eta 10.5 min
+  1501/1860  local_api_oneshot 7.5 ms  elapsed 34.5 min  eta 8.2 min
+  1601/1860  local_api_oneshot 10.3 ms  elapsed 36.8 min  eta 6.0 min
+  1701/1860  local_api_oneshot 10.6 ms  elapsed 39.2 min  eta 3.7 min
+  1801/1860  local_api_stats 1013.2 ms  elapsed 41.6 min  eta 1.4 min
+  1860/1860  local_cli_stats 1022.5 ms  elapsed 43.0 min  eta 0.0 min
+
+== [21:26:11] x_botan_e3: E3 tail (kiri -> botan)
+e3: 4020 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e3/20261001-212611_kiri_to_botan.csv
+  1/4020  ssh_true 601.7 ms  elapsed 0.0 min  eta 43.7 min
+  101/4020  ctx_inspect 2047.4 ms  elapsed 1.5 min  eta 59.9 min
+  201/4020  ctx_ps 547.3 ms  elapsed 2.6 min  eta 50.2 min
+  301/4020  ssh_true 515.9 ms  elapsed 3.6 min  eta 44.5 min
+  401/4020  ssh_phases 576.4 ms  elapsed 4.6 min  eta 41.1 min
+  501/4020  ssh_true 502.4 ms  elapsed 5.5 min  eta 38.5 min
+  601/4020  ctx_inspect 549.3 ms  elapsed 6.4 min  eta 36.6 min
+  701/4020  ssh_phases 489.7 ms  elapsed 7.4 min  eta 35.1 min
+  801/4020  ctx_inspect 592.6 ms  elapsed 8.4 min  eta 33.6 min
+  901/4020  ctx_ps 571.5 ms  elapsed 9.3 min  eta 32.4 min
+  1001/4020  ctx_ps 412.7 ms  elapsed 10.3 min  eta 31.1 min
+  1101/4020  ssh_true 478.8 ms  elapsed 11.2 min  eta 29.8 min
+  1201/4020  ssh_true 444.8 ms  elapsed 12.2 min  eta 28.7 min
+  1301/4020  ssh_phases 443.8 ms  elapsed 13.2 min  eta 27.6 min
+  1401/4020  ctx_ps 538.0 ms  elapsed 14.2 min  eta 26.6 min
+  1501/4020  ctx_inspect 628.3 ms  elapsed 15.2 min  eta 25.6 min
+  1601/4020  ctx_ps 669.9 ms  elapsed 16.2 min  eta 24.5 min
+  1701/4020  ctx_ps 540.7 ms  elapsed 17.7 min  eta 24.1 min
+  1801/4020  ctx_ps 550.9 ms  elapsed 18.7 min  eta 23.0 min
+  1901/4020  ssh_phases 504.1 ms  elapsed 19.5 min  eta 21.8 min
+  2001/4020  ssh_phases 278.7 ms  elapsed 20.3 min  eta 20.5 min
+  2101/4020  ctx_ps 407.9 ms  elapsed 21.1 min  eta 19.2 min
+  2201/4020  ssh_phases 538.7 ms  elapsed 21.8 min  eta 18.0 min
+  2301/4020  ssh_true 402.1 ms  elapsed 22.6 min  eta 16.9 min
+  2401/4020  ctx_ps 511.8 ms  elapsed 23.4 min  eta 15.8 min
+  2501/4020  ctx_ps 325.2 ms  elapsed 24.2 min  eta 14.7 min
+  2601/4020  ssh_phases 489.9 ms  elapsed 25.0 min  eta 13.6 min
+  2701/4020  ssh_phases 267.4 ms  elapsed 25.8 min  eta 12.6 min
+  2801/4020  ctx_inspect 314.8 ms  elapsed 26.6 min  eta 11.6 min
+  2901/4020  ssh_phases 310.9 ms  elapsed 27.4 min  eta 10.6 min
+  3001/4020  ssh_true 453.4 ms  elapsed 28.2 min  eta 9.6 min
+  3101/4020  ctx_ps 468.2 ms  elapsed 28.9 min  eta 8.6 min
+  3201/4020  ssh_true 273.3 ms  elapsed 29.7 min  eta 7.6 min
+  3301/4020  ssh_phases 262.4 ms  elapsed 30.5 min  eta 6.6 min
+  3401/4020  ssh_true 420.2 ms  elapsed 31.3 min  eta 5.7 min
+  3501/4020  ssh_phases 312.5 ms  elapsed 32.1 min  eta 4.8 min
+  3601/4020  ssh_true 495.6 ms  elapsed 32.9 min  eta 3.8 min
+  3701/4020  ctx_ps 527.9 ms  elapsed 33.6 min  eta 2.9 min
+  3801/4020  ssh_true 515.7 ms  elapsed 34.4 min  eta 2.0 min
+  3901/4020  ssh_true 259.0 ms  elapsed 35.2 min  eta 1.1 min
+  4001/4020  ctx_ps 447.9 ms  elapsed 36.0 min  eta 0.2 min
+  4020/4020  ssh_true 395.9 ms  elapsed 36.1 min  eta 0.0 min
+
+== [22:02:24] x_botan_e4: E4 transport paths (kiri -> botan)
+note: context sshmf-botan-lan unreachable, its conditions are skipped
+note: context sshmf-botan-tls unreachable, its conditions are skipped
+e4: 3355 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e4/20261001-220229_kiri_to_botan.csv
+  1/3355  cm_version 583.2 ms  elapsed 0.0 min  eta 35.4 min
+  101/3355  cm_version 58.3 ms  elapsed 0.5 min  eta 16.4 min
+  201/3355  ts_inspect 735.2 ms  elapsed 1.0 min  eta 16.0 min
+  301/3355  tuned_ps 283.5 ms  elapsed 1.5 min  eta 15.0 min
+  401/3355  ts_inspect 562.2 ms  elapsed 2.0 min  eta 14.7 min
+  501/3355  cm_ps 83.1 ms  elapsed 2.5 min  eta 14.2 min
+  601/3355  ts_inspect 311.9 ms  elapsed 3.0 min  eta 13.7 min
+  701/3355  cm_inspect 49.1 ms  elapsed 3.5 min  eta 13.1 min
+  801/3355  cm_ps 84.9 ms  elapsed 4.0 min  eta 12.7 min
+  901/3355  tuned_inspect 478.7 ms  elapsed 4.5 min  eta 12.2 min
+  1001/3355  tuned_ps 512.7 ms  elapsed 5.0 min  eta 11.7 min
+  1101/3355  tuned_ps 417.0 ms  elapsed 5.5 min  eta 11.2 min
+  1201/3355  cm_inspect 38.4 ms  elapsed 6.0 min  eta 10.7 min
+  1301/3355  ts_inspect 504.8 ms  elapsed 6.4 min  eta 10.2 min
+  1401/3355  tuned_ps 539.3 ms  elapsed 6.9 min  eta 9.7 min
+  1501/3355  ts_inspect 470.0 ms  elapsed 7.4 min  eta 9.1 min
+  1601/3355  ts_ps 395.9 ms  elapsed 7.9 min  eta 8.6 min
+  1701/3355  local_cli_version 25.4 ms  elapsed 8.4 min  eta 8.2 min
+  1801/3355  ts_inspect 504.1 ms  elapsed 8.9 min  eta 7.7 min
+  1901/3355  ts_inspect 509.4 ms  elapsed 9.4 min  eta 7.2 min
+  2001/3355  ts_ps 315.4 ms  elapsed 9.8 min  eta 6.7 min
+  2101/3355  tuned_inspect 394.3 ms  elapsed 10.3 min  eta 6.2 min
+  2201/3355  ts_ps 432.5 ms  elapsed 10.8 min  eta 5.7 min
+  2301/3355  local_cli_ps 41.8 ms  elapsed 11.3 min  eta 5.2 min
+  2401/3355  cm_ps 80.0 ms  elapsed 11.8 min  eta 4.7 min
+  2501/3355  ts_inspect 373.9 ms  elapsed 12.3 min  eta 4.2 min
+  2601/3355  ts_inspect 507.6 ms  elapsed 12.8 min  eta 3.7 min
+  2701/3355  ts_inspect 302.0 ms  elapsed 13.3 min  eta 3.2 min
+  2801/3355  tuned_inspect 409.4 ms  elapsed 13.8 min  eta 2.7 min
+  2901/3355  cm_ps 66.9 ms  elapsed 14.2 min  eta 2.2 min
+  3001/3355  ts_version 319.8 ms  elapsed 14.7 min  eta 1.7 min
+  3101/3355  tuned_ps 291.3 ms  elapsed 15.2 min  eta 1.2 min
+  3201/3355  cm_ps 71.2 ms  elapsed 15.7 min  eta 0.8 min
+  3301/3355  tuned_ps 416.2 ms  elapsed 16.2 min  eta 0.3 min
+  3355/3355  cm_ps 65.8 ms  elapsed 16.4 min  eta 0.0 min
+
+== [22:19:00] x_botan_e5: E5 payload sweep (kiri -> botan)
+e5: 740 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e5/20261001-221900_kiri_to_botan.csv
+  1/740  cm_logs_50 54.2 ms  elapsed 0.0 min  eta 1.3 min
+  101/740  cm_logs_1000 64.8 ms  elapsed 2.3 min  eta 14.5 min
+  201/740  cm_logs_200 55.7 ms  elapsed 4.2 min  eta 11.3 min
+  301/740  ts_logs_100000 1376.5 ms  elapsed 6.4 min  eta 9.3 min
+  401/740  cm_logs_50000 617.0 ms  elapsed 8.4 min  eta 7.1 min
+  501/740  cm_logs_200 53.5 ms  elapsed 9.3 min  eta 4.5 min
+  601/740  cm_logs_200 53.1 ms  elapsed 10.0 min  eta 2.3 min
+  701/740  ts_logs_200 372.1 ms  elapsed 10.6 min  eta 0.6 min
+  740/740  cm_logs_10000 169.4 ms  elapsed 10.8 min  eta 0.0 min
+
+== [22:29:51] x_botan_e5_local: E5 local baseline on botan
+e5: 370 calls -> /home/<user>/sshmf-harness/data/raw/e5/20261001-222951_botan_to_local.csv
+  1/370  local_logs_500000 4260.8 ms  elapsed 0.1 min  eta 26.5 min
+  101/370  local_logs_10000 109.2 ms  elapsed 1.2 min  eta 3.2 min
+  201/370  local_logs_100000 721.3 ms  elapsed 2.5 min  eta 2.1 min
+  301/370  local_logs_50 15.2 ms  elapsed 2.8 min  eta 0.6 min
+  370/370  local_logs_50 14.9 ms  elapsed 2.9 min  eta 0.0 min
+
+== [22:32:47] x_keyaki_setup: aliases, harness copy, contexts, containers, preflight for keyaki
+wrote /home/<user>/.ssh/config.d/sshmf-keyaki.conf
+$ ssh sshmf-keyaki-ts true
+  sshmf-keyaki-ts: OK
+$ ssh sshmf-keyaki-lan true
+  sshmf-keyaki-lan: FAIL ssh: connect to host <redacted-ip> port <ssh-port>: Connection timed out
+$ ssh sshmf-keyaki-cm true
+  sshmf-keyaki-cm: OK
+$ ssh sshmf-keyaki-tuned true
+  sshmf-keyaki-tuned: OK
+$ docker context create sshmf-keyaki-ts --description SSH-MF ts path to keyaki --docker host=ssh://sshmf-keyaki-ts
+  sshmf-keyaki-ts: server 28.0.4 on daemon host 'keyaki'
+$ docker context create sshmf-keyaki-lan --description SSH-MF lan path to keyaki --docker host=ssh://sshmf-keyaki-lan
+  sshmf-keyaki-lan: FAIL error during connect: Get "http://docker.example.com/v1.54/version": command [ssh -o ConnectTimeout=30 -T -- sshmf-keyaki-lan docker system dial-stdio] has exited with exit status 255, make sure the URL is valid, and Docker 18.09 or later is installed on the remote host: stderr=ssh: connect to host <redacted-ip> port <ssh-port>: Connection timed out
+$ docker context create sshmf-keyaki-cm --description SSH-MF cm path to keyaki --docker host=ssh://sshmf-keyaki-cm
+  sshmf-keyaki-cm: server 28.0.4 on daemon host 'keyaki'
+$ docker context create sshmf-keyaki-tuned --description SSH-MF tuned path to keyaki --docker host=ssh://sshmf-keyaki-tuned
+  sshmf-keyaki-tuned: server 28.0.4 on daemon host 'keyaki'
+$ docker --context sshmf-keyaki-ts rm -f sshmf-probe sshmf-logs
+$ docker --context sshmf-keyaki-ts run -d --name sshmf-probe --label sshmf=1 alpine:3.20 sleep infinity
+$ docker --context sshmf-keyaki-ts run -d --name sshmf-logs --label sshmf=1 --log-driver json-file --log-opt max-size=2g --log-opt max-file=1 alpine:3.20 sh -c awk 'BEGIN{for(i=0;i<600000;i++) printf "%07d xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n", i}'; sleep infinity
+  sshmf-logs: 600000 lines x 100 B ready
+[PASS] not running as root                                            1007
+[PASS] ssh alias ts has no multiplexing                               controlmaster false
+[PASS] ssh alias cm multiplexes                                       controlmaster auto
+[PASS] context sshmf-keyaki-ts reaches daemon 'keyaki'                keyaki
+[WARN] context sshmf-keyaki-lan reaches daemon 'keyaki' (optional)    error during connect: Get "http://docker.example.com/v1.54/info": command [ssh -o ConnectTimeout=30 -T -- sshm
+[PASS] context sshmf-keyaki-cm reaches daemon 'keyaki'                keyaki
+[PASS] context sshmf-keyaki-tuned reaches daemon 'keyaki' (optional)  keyaki
+[PASS] keyaki: remote docker CLI uses context 'default'               default
+[PASS] local docker socket (curl)                                     OK
+[PASS] target: curl + docker socket (optional on observe-only)        OK
+[WARN] context sshmf-keyaki-tls (optional, E4)                        Failed to initialize: unable to resolve docker endpoint: context "sshmf-keyaki-tls": context not found: open /
+[PASS] target: python3 >= 3.11                                        3.11.2
+[PASS] target container sshmf-probe running                           true
+[PASS] target container sshmf-logs running                            true
+[PASS] tailscale path is direct                                       pong from keyaki (<redacted-ip>) via <redacted-ip>:41641 in 1ms
+[PASS] local NTP synchronised                                         yes
+[PASS] target NTP synchronised                                        yes
+[PASS] target fail2ban inactive (E8 single)                           inactive
+[PASS] target sshd MaxStartups (default 10:30:100)                    default
+[PASS] no netem active on tailscale0                                  qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32
+[PASS] local load1 < 2                                                0.02 0.13 0.20 1/1582 4008315
+[PASS] target load1 < 2                                               0.12 0.08 0.02 1/994 2520918
+
+== [22:36:41] x_keyaki_e1: E1 alpha decomposition (kiri -> keyaki)
+e1: 6565 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e1/20261001-223642_kiri_to_keyaki.csv
+  1/6565  ctx_inspect 307.8 ms  elapsed 0.0 min  eta 39.2 min
+  101/6565  tuned_ctx_ps 264.5 ms  elapsed 0.5 min  eta 29.4 min
+  201/6565  tuned_ssh_phases 205.1 ms  elapsed 0.9 min  eta 28.6 min
+  301/6565  local_cli_version 27.8 ms  elapsed 1.3 min  eta 28.1 min
+  401/6565  local_cli_version 30.6 ms  elapsed 1.8 min  eta 27.6 min
+  501/6565  tuned_ctx_ps 261.4 ms  elapsed 2.2 min  eta 27.2 min
+  601/6565  tuned_ssh_true 205.8 ms  elapsed 2.7 min  eta 26.8 min
+  701/6565  tuned_ssh_true 211.6 ms  elapsed 3.1 min  eta 26.3 min
+  801/6565  ctx_inspect 302.8 ms  elapsed 3.6 min  eta 25.8 min
+  901/6565  ssh_phases 260.5 ms  elapsed 4.0 min  eta 25.4 min
+  1001/6565  local_cli_version 27.6 ms  elapsed 4.5 min  eta 24.9 min
+  1101/6565  tuned_ssh_true 207.9 ms  elapsed 4.9 min  eta 24.5 min
+  1201/6565  local_api_ps 25.5 ms  elapsed 5.4 min  eta 24.0 min
+  1301/6565  ssh_true 263.3 ms  elapsed 5.8 min  eta 23.6 min
+  1401/6565  local_api_ps 27.4 ms  elapsed 6.3 min  eta 23.1 min
+  1501/6565  ssh_true 279.2 ms  elapsed 6.7 min  eta 22.7 min
+  1601/6565  local_api_ps 31.5 ms  elapsed 7.2 min  eta 22.3 min
+  1701/6565  local_api_ps 33.0 ms  elapsed 7.6 min  eta 21.8 min
+  1801/6565  ctx_version 309.2 ms  elapsed 8.1 min  eta 21.4 min
+  1901/6565  local_api_ps 33.9 ms  elapsed 8.5 min  eta 20.9 min
+  2001/6565  ssh_true 274.2 ms  elapsed 9.0 min  eta 20.4 min
+  2101/6565  local_cli_version 30.9 ms  elapsed 9.4 min  eta 20.0 min
+  2201/6565  local_cli_ps 43.1 ms  elapsed 9.9 min  eta 19.5 min
+  2301/6565  local_cli_ps 34.3 ms  elapsed 10.3 min  eta 19.1 min
+  2401/6565  local_cli_version 24.9 ms  elapsed 10.8 min  eta 18.7 min
+  2501/6565  ssh_true 266.5 ms  elapsed 11.2 min  eta 18.2 min
+  2601/6565  ssh_cli_version 300.6 ms  elapsed 11.7 min  eta 17.8 min
+  2701/6565  local_cli_ps 40.7 ms  elapsed 12.1 min  eta 17.3 min
+  2801/6565  ssh_api_ps 308.7 ms  elapsed 12.6 min  eta 16.9 min
+  2901/6565  local_cli_ps 46.6 ms  elapsed 13.0 min  eta 16.4 min
+  3001/6565  tuned_ctx_ps 261.7 ms  elapsed 13.5 min  eta 16.0 min
+  3101/6565  tuned_ctx_ps 262.4 ms  elapsed 13.9 min  eta 15.5 min
+  3201/6565  ctx_version 317.0 ms  elapsed 14.4 min  eta 15.1 min
+  3301/6565  ssh_api_ps 271.4 ms  elapsed 14.8 min  eta 14.6 min
+  3401/6565  local_cli_version 25.4 ms  elapsed 15.2 min  eta 14.2 min
+  3501/6565  tuned_ssh_phases 209.9 ms  elapsed 15.7 min  eta 13.7 min
+  3601/6565  ssh_true 269.3 ms  elapsed 16.1 min  eta 13.3 min
+  3701/6565  local_api_ps 30.0 ms  elapsed 16.6 min  eta 12.8 min
+  3801/6565  ssh_true 264.4 ms  elapsed 17.0 min  eta 12.4 min
+  3901/6565  ctx_version 346.0 ms  elapsed 17.5 min  eta 11.9 min
+  4001/6565  ctx_ps 348.4 ms  elapsed 17.9 min  eta 11.5 min
+  4101/6565  ctx_version 314.6 ms  elapsed 18.4 min  eta 11.0 min
+  4201/6565  tuned_ctx_ps 258.7 ms  elapsed 18.8 min  eta 10.6 min
+  4301/6565  ctx_version 312.2 ms  elapsed 19.3 min  eta 10.1 min
+  4401/6565  ssh_phases 261.7 ms  elapsed 19.7 min  eta 9.7 min
+  4501/6565  tuned_ssh_true 208.0 ms  elapsed 20.2 min  eta 9.3 min
+  4601/6565  local_api_ps 30.1 ms  elapsed 20.6 min  eta 8.8 min
+  4701/6565  local_cli_ps 51.3 ms  elapsed 21.1 min  eta 8.4 min
+  4801/6565  ctx_ps 306.7 ms  elapsed 21.5 min  eta 7.9 min
+  4901/6565  ctx_version 314.1 ms  elapsed 22.0 min  eta 7.5 min
+  5001/6565  local_cli_ps 43.6 ms  elapsed 22.4 min  eta 7.0 min
+  5101/6565  tuned_ssh_true 215.0 ms  elapsed 22.9 min  eta 6.6 min
+  5201/6565  local_cli_ps 49.2 ms  elapsed 23.3 min  eta 6.1 min
+  5301/6565  ssh_phases 271.0 ms  elapsed 23.8 min  eta 5.7 min
+  5401/6565  tuned_ssh_true 210.4 ms  elapsed 24.2 min  eta 5.2 min
+  5501/6565  ssh_true 264.1 ms  elapsed 24.7 min  eta 4.8 min
+  5601/6565  ssh_true 263.3 ms  elapsed 25.1 min  eta 4.3 min
+  5701/6565  local_cli_ps 44.0 ms  elapsed 25.5 min  eta 3.9 min
+  5801/6565  tuned_ssh_phases 206.6 ms  elapsed 26.0 min  eta 3.4 min
+  5901/6565  local_cli_ps 44.2 ms  elapsed 26.5 min  eta 3.0 min
+  6001/6565  tuned_ssh_phases 212.2 ms  elapsed 26.9 min  eta 2.5 min
+  6101/6565  ssh_true 260.5 ms  elapsed 27.4 min  eta 2.1 min
+  6201/6565  local_api_ps 30.0 ms  elapsed 27.8 min  eta 1.6 min
+  6301/6565  local_cli_ps 39.5 ms  elapsed 28.3 min  eta 1.2 min
+  6401/6565  local_cli_version 26.7 ms  elapsed 28.7 min  eta 0.7 min
+  6501/6565  local_api_ps 33.5 ms  elapsed 29.1 min  eta 0.3 min
+  6565/6565  local_api_ps 24.7 ms  elapsed 29.4 min  eta 0.0 min
+
+== [23:06:12] x_keyaki_e1_local: E1 local baseline on keyaki
+note: no curl on ume, raw-API conditions are skipped
+note: context sshmf-ume-tuned unreachable, its conditions are skipped
+e1: 2525 calls -> /home/<user>/sshmf-harness/data/raw/e1/20261002-080612_keyaki_to_local.csv
+  1/2525  local_cli_version 38.6 ms  elapsed 0.0 min  eta 3.7 min
+  101/2525  local_cli_inspect 28.7 ms  elapsed 0.1 min  eta 3.1 min
+  201/2525  local_api_inspect 17.1 ms  elapsed 0.3 min  eta 3.0 min
+  301/2525  local_cli_version 36.6 ms  elapsed 0.4 min  eta 2.8 min
+  401/2525  local_cli_inspect 28.2 ms  elapsed 0.5 min  eta 2.7 min
+  501/2525  local_cli_version 36.4 ms  elapsed 0.6 min  eta 2.6 min
+  601/2525  local_api_ps 18.5 ms  elapsed 0.8 min  eta 2.5 min
+  701/2525  local_api_ps 18.8 ms  elapsed 0.9 min  eta 2.3 min
+  801/2525  local_api_ps 17.7 ms  elapsed 1.0 min  eta 2.2 min
+  901/2525  local_api_inspect 15.7 ms  elapsed 1.1 min  eta 2.1 min
+  1001/2525  local_api_inspect 16.5 ms  elapsed 1.3 min  eta 1.9 min
+  1101/2525  local_cli_version 37.0 ms  elapsed 1.4 min  eta 1.8 min
+  1201/2525  local_api_ps 17.9 ms  elapsed 1.5 min  eta 1.7 min
+  1301/2525  local_api_inspect 15.8 ms  elapsed 1.7 min  eta 1.6 min
+  1401/2525  local_cli_version 36.9 ms  elapsed 1.8 min  eta 1.4 min
+  1501/2525  local_cli_ps 30.2 ms  elapsed 1.9 min  eta 1.3 min
+  1601/2525  local_api_inspect 14.8 ms  elapsed 2.0 min  eta 1.2 min
+  1701/2525  local_cli_inspect 28.2 ms  elapsed 2.2 min  eta 1.1 min
+  1801/2525  local_cli_ps 31.3 ms  elapsed 2.3 min  eta 0.9 min
+  1901/2525  local_cli_inspect 28.8 ms  elapsed 2.4 min  eta 0.8 min
+  2001/2525  local_cli_version 37.9 ms  elapsed 2.6 min  eta 0.7 min
+  2101/2525  local_api_ps 17.2 ms  elapsed 2.7 min  eta 0.5 min
+  2201/2525  local_cli_ps 30.4 ms  elapsed 2.8 min  eta 0.4 min
+  2301/2525  local_cli_inspect 28.2 ms  elapsed 2.9 min  eta 0.3 min
+  2401/2525  local_cli_version 38.1 ms  elapsed 3.1 min  eta 0.2 min
+  2501/2525  local_cli_inspect 29.6 ms  elapsed 3.2 min  eta 0.0 min
+  2525/2525  local_api_inspect 15.8 ms  elapsed 3.2 min  eta 0.0 min
+
+== [23:09:26] x_keyaki_e2: E2 phase absorption (kiri -> keyaki)
+e2: 1860 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e2/20261001-230926_kiri_to_keyaki.csv
+  1/1860  ctx_cli_stats 1338.2 ms  elapsed 0.0 min  eta 43.0 min
+  101/1860  ctx_cli_stats 1958.1 ms  elapsed 3.4 min  eta 58.6 min
+  201/1860  ssh_api_oneshot 296.8 ms  elapsed 4.0 min  eta 33.3 min
+  301/1860  ctx_cli_stats 1955.9 ms  elapsed 7.1 min  eta 36.8 min
+  401/1860  ssh_api_oneshot 285.0 ms  elapsed 8.1 min  eta 29.3 min
+  501/1860  ctx_cli_stats 1954.0 ms  elapsed 10.9 min  eta 29.4 min
+  601/1860  ssh_api_stats 1954.6 ms  elapsed 14.2 min  eta 29.7 min
+  701/1860  ssh_api_stats 1957.1 ms  elapsed 17.5 min  eta 29.0 min
+  801/1860  ssh_api_stats 1954.8 ms  elapsed 20.9 min  eta 27.6 min
+  901/1860  ssh_api_oneshot 276.1 ms  elapsed 22.5 min  eta 24.0 min
+  1001/1860  ctx_cli_stats 1318.9 ms  elapsed 24.3 min  eta 20.9 min
+  1101/1860  ctx_cli_stats 1324.2 ms  elapsed 26.9 min  eta 18.5 min
+  1201/1860  ssh_api_oneshot 278.4 ms  elapsed 29.5 min  eta 16.2 min
+  1301/1860  ssh_api_oneshot 287.3 ms  elapsed 32.2 min  eta 13.8 min
+  1401/1860  ssh_api_oneshot 279.8 ms  elapsed 34.8 min  eta 11.4 min
+  1501/1860  ssh_api_oneshot 290.3 ms  elapsed 37.5 min  eta 9.0 min
+  1601/1860  ssh_api_oneshot 284.6 ms  elapsed 40.1 min  eta 6.5 min
+  1701/1860  ssh_api_oneshot 284.1 ms  elapsed 42.8 min  eta 4.0 min
+  1801/1860  ssh_api_stats 1291.7 ms  elapsed 45.4 min  eta 1.5 min
+  1860/1860  ctx_cli_stats 1317.9 ms  elapsed 47.0 min  eta 0.0 min
+
+== [23:56:30] x_keyaki_e2_local: E2 local baseline on keyaki
+note: no curl on ume, raw-API conditions are skipped
+e2: 1860 calls -> /home/<user>/sshmf-harness/data/raw/e2/20261002-085630_keyaki_to_local.csv
+  1/1860  local_cli_stats 1533.8 ms  elapsed 0.0 min  eta 49.1 min
+  101/1860  local_cli_stats 1956.9 ms  elapsed 3.4 min  eta 58.7 min
+  201/1860  local_api_oneshot 16.6 ms  elapsed 3.6 min  eta 29.8 min
+  301/1860  local_cli_stats 1955.0 ms  elapsed 6.7 min  eta 34.5 min
+  401/1860  local_api_oneshot 17.8 ms  elapsed 7.2 min  eta 26.3 min
+  501/1860  local_cli_stats 1955.3 ms  elapsed 9.9 min  eta 27.0 min
+  601/1860  local_api_stats 1955.2 ms  elapsed 13.3 min  eta 27.8 min
+  701/1860  local_api_stats 1954.5 ms  elapsed 16.6 min  eta 27.5 min
+  801/1860  local_api_stats 1955.7 ms  elapsed 20.0 min  eta 26.4 min
+  901/1860  local_api_oneshot 17.8 ms  elapsed 21.3 min  eta 22.7 min
+  1001/1860  local_cli_stats 1644.0 ms  elapsed 22.9 min  eta 19.6 min
+  1101/1860  local_cli_stats 1534.4 ms  elapsed 25.3 min  eta 17.5 min
+  1201/1860  local_api_oneshot 18.8 ms  elapsed 27.8 min  eta 15.3 min
+  1301/1860  local_api_oneshot 19.1 ms  elapsed 30.4 min  eta 13.0 min
+  1401/1860  local_api_oneshot 19.7 ms  elapsed 32.9 min  eta 10.8 min
+  1501/1860  local_api_oneshot 18.6 ms  elapsed 35.4 min  eta 8.5 min
+  1601/1860  local_api_oneshot 19.4 ms  elapsed 38.0 min  eta 6.1 min
+  1701/1860  local_api_oneshot 19.6 ms  elapsed 40.5 min  eta 3.8 min
+  1801/1860  local_api_stats 1021.6 ms  elapsed 43.0 min  eta 1.4 min
+  1860/1860  local_cli_stats 1536.2 ms  elapsed 44.6 min  eta 0.0 min
+
+== [00:41:04] x_keyaki_e3: E3 tail (kiri -> keyaki)
+e3: 4020 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e3/20261002-004104_kiri_to_keyaki.csv
+  1/4020  ssh_true 261.1 ms  elapsed 0.0 min  eta 20.9 min
+  101/4020  ctx_inspect 302.7 ms  elapsed 0.6 min  eta 22.2 min
+  201/4020  ctx_ps 307.7 ms  elapsed 1.1 min  eta 21.6 min
+  301/4020  ssh_true 262.3 ms  elapsed 1.7 min  eta 21.1 min
+  401/4020  ssh_phases 266.3 ms  elapsed 2.3 min  eta 20.5 min
+  501/4020  ssh_true 261.1 ms  elapsed 2.8 min  eta 20.0 min
+  601/4020  ctx_inspect 312.4 ms  elapsed 3.4 min  eta 19.4 min
+  701/4020  ssh_phases 261.7 ms  elapsed 4.0 min  eta 18.8 min
+  801/4020  ctx_inspect 311.9 ms  elapsed 4.5 min  eta 18.2 min
+  901/4020  ctx_ps 304.8 ms  elapsed 5.1 min  eta 17.7 min
+  1001/4020  ctx_ps 311.5 ms  elapsed 5.7 min  eta 17.1 min
+  1101/4020  ssh_true 259.5 ms  elapsed 6.2 min  eta 16.5 min
+  1201/4020  ssh_true 267.6 ms  elapsed 6.8 min  eta 16.0 min
+  1301/4020  ssh_phases 260.6 ms  elapsed 7.4 min  eta 15.4 min
+  1401/4020  ctx_ps 301.6 ms  elapsed 7.9 min  eta 14.8 min
+  1501/4020  ctx_inspect 316.2 ms  elapsed 8.5 min  eta 14.3 min
+  1601/4020  ctx_ps 311.1 ms  elapsed 9.1 min  eta 13.7 min
+  1701/4020  ctx_ps 316.0 ms  elapsed 9.6 min  eta 13.1 min
+  1801/4020  ctx_ps 312.5 ms  elapsed 10.2 min  eta 12.6 min
+  1901/4020  ssh_phases 264.6 ms  elapsed 10.8 min  eta 12.0 min
+  2001/4020  ssh_phases 271.8 ms  elapsed 11.3 min  eta 11.4 min
+  2101/4020  ctx_ps 319.3 ms  elapsed 11.9 min  eta 10.9 min
+  2201/4020  ssh_phases 270.4 ms  elapsed 12.5 min  eta 10.3 min
+  2301/4020  ssh_true 264.9 ms  elapsed 13.0 min  eta 9.7 min
+  2401/4020  ctx_ps 316.0 ms  elapsed 13.6 min  eta 9.2 min
+  2501/4020  ctx_ps 314.7 ms  elapsed 14.2 min  eta 8.6 min
+  2601/4020  ssh_phases 262.9 ms  elapsed 14.7 min  eta 8.0 min
+  2701/4020  ssh_phases 266.8 ms  elapsed 15.3 min  eta 7.5 min
+  2801/4020  ctx_inspect 307.4 ms  elapsed 15.8 min  eta 6.9 min
+  2901/4020  ssh_phases 262.7 ms  elapsed 16.4 min  eta 6.3 min
+  3001/4020  ssh_true 262.4 ms  elapsed 17.0 min  eta 5.8 min
+  3101/4020  ctx_ps 318.4 ms  elapsed 17.5 min  eta 5.2 min
+  3201/4020  ssh_true 284.2 ms  elapsed 18.1 min  eta 4.6 min
+  3301/4020  ssh_phases 261.8 ms  elapsed 18.7 min  eta 4.1 min
+  3401/4020  ssh_true 259.4 ms  elapsed 19.2 min  eta 3.5 min
+  3501/4020  ssh_phases 260.3 ms  elapsed 19.8 min  eta 2.9 min
+  3601/4020  ssh_true 269.7 ms  elapsed 20.4 min  eta 2.4 min
+  3701/4020  ctx_ps 316.6 ms  elapsed 20.9 min  eta 1.8 min
+  3801/4020  ssh_true 261.3 ms  elapsed 21.5 min  eta 1.2 min
+  3901/4020  ssh_true 257.5 ms  elapsed 22.1 min  eta 0.7 min
+  4001/4020  ctx_ps 307.5 ms  elapsed 22.6 min  eta 0.1 min
+  4020/4020  ssh_true 263.9 ms  elapsed 22.7 min  eta 0.0 min
+
+== [01:03:53] x_keyaki_e4: E4 transport paths (kiri -> keyaki)
+note: context sshmf-keyaki-lan unreachable, its conditions are skipped
+note: context sshmf-keyaki-tls unreachable, its conditions are skipped
+e4: 3355 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e4/20261002-010358_kiri_to_keyaki.csv
+  1/3355  cm_version 317.2 ms  elapsed 0.0 min  eta 20.5 min
+  101/3355  cm_version 78.7 ms  elapsed 0.4 min  eta 12.8 min
+  201/3355  ts_inspect 309.6 ms  elapsed 0.8 min  eta 12.4 min
+  301/3355  tuned_ps 262.9 ms  elapsed 1.2 min  eta 11.9 min
+  401/3355  ts_inspect 334.5 ms  elapsed 1.6 min  eta 11.6 min
+  501/3355  cm_ps 71.2 ms  elapsed 2.0 min  eta 11.1 min
+  601/3355  ts_inspect 313.4 ms  elapsed 2.4 min  eta 10.8 min
+  701/3355  cm_inspect 67.2 ms  elapsed 2.7 min  eta 10.4 min
+  801/3355  cm_ps 70.0 ms  elapsed 3.1 min  eta 10.0 min
+  901/3355  tuned_inspect 257.4 ms  elapsed 3.5 min  eta 9.6 min
+  1001/3355  tuned_ps 257.1 ms  elapsed 3.9 min  eta 9.2 min
+  1101/3355  tuned_ps 259.2 ms  elapsed 4.3 min  eta 8.8 min
+  1201/3355  cm_inspect 69.3 ms  elapsed 4.7 min  eta 8.4 min
+  1301/3355  ts_inspect 309.3 ms  elapsed 5.1 min  eta 8.0 min
+  1401/3355  tuned_ps 261.8 ms  elapsed 5.5 min  eta 7.6 min
+  1501/3355  ts_inspect 345.0 ms  elapsed 5.9 min  eta 7.3 min
+  1601/3355  ts_ps 317.7 ms  elapsed 6.3 min  eta 6.9 min
+  1701/3355  local_cli_version 30.4 ms  elapsed 6.7 min  eta 6.5 min
+  1801/3355  ts_inspect 317.6 ms  elapsed 7.1 min  eta 6.1 min
+  1901/3355  ts_inspect 308.9 ms  elapsed 7.5 min  eta 5.7 min
+  2001/3355  ts_ps 308.8 ms  elapsed 7.8 min  eta 5.3 min
+  2101/3355  tuned_inspect 255.1 ms  elapsed 8.2 min  eta 4.9 min
+  2201/3355  ts_ps 322.4 ms  elapsed 8.6 min  eta 4.5 min
+  2301/3355  local_cli_ps 39.2 ms  elapsed 9.0 min  eta 4.1 min
+  2401/3355  cm_ps 70.0 ms  elapsed 9.4 min  eta 3.7 min
+  2501/3355  ts_inspect 304.5 ms  elapsed 9.8 min  eta 3.3 min
+  2601/3355  ts_inspect 316.9 ms  elapsed 10.2 min  eta 3.0 min
+  2701/3355  ts_inspect 321.2 ms  elapsed 10.6 min  eta 2.6 min
+  2801/3355  tuned_inspect 256.2 ms  elapsed 11.0 min  eta 2.2 min
+  2901/3355  cm_ps 69.7 ms  elapsed 11.4 min  eta 1.8 min
+  3001/3355  ts_version 317.0 ms  elapsed 11.7 min  eta 1.4 min
+  3101/3355  tuned_ps 263.1 ms  elapsed 12.1 min  eta 1.0 min
+  3201/3355  cm_ps 65.5 ms  elapsed 12.5 min  eta 0.6 min
+  3301/3355  tuned_ps 259.2 ms  elapsed 12.9 min  eta 0.2 min
+  3355/3355  cm_ps 76.3 ms  elapsed 13.1 min  eta 0.0 min
+
+== [01:17:10] x_keyaki_e5: E5 payload sweep (kiri -> keyaki)
+e5: 740 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e5/20261002-011710_kiri_to_keyaki.csv
+  1/740  cm_logs_50 61.3 ms  elapsed 0.0 min  eta 1.4 min
+  101/740  cm_logs_1000 78.0 ms  elapsed 2.0 min  eta 12.9 min
+  201/740  cm_logs_200 69.0 ms  elapsed 3.8 min  eta 10.2 min
+  301/740  ts_logs_100000 1407.9 ms  elapsed 5.8 min  eta 8.4 min
+  401/740  cm_logs_50000 635.6 ms  elapsed 7.6 min  eta 6.5 min
+  501/740  cm_logs_200 71.6 ms  elapsed 8.5 min  eta 4.0 min
+  601/740  cm_logs_200 74.8 ms  elapsed 9.1 min  eta 2.1 min
+  701/740  ts_logs_200 324.8 ms  elapsed 9.6 min  eta 0.5 min
+  740/740  cm_logs_10000 192.6 ms  elapsed 9.8 min  eta 0.0 min
+
+== [01:26:59] x_keyaki_e5_local: E5 local baseline on keyaki
+e5: 370 calls -> /home/<user>/sshmf-harness/data/raw/e5/20261002-102659_keyaki_to_local.csv
+  1/370  local_logs_500000 3269.6 ms  elapsed 0.1 min  eta 20.4 min
+  101/370  local_logs_10000 108.5 ms  elapsed 1.0 min  eta 2.7 min
+  201/370  local_logs_100000 691.1 ms  elapsed 2.1 min  eta 1.8 min
+  301/370  local_logs_50 30.5 ms  elapsed 2.4 min  eta 0.6 min
+  370/370  local_logs_50 29.2 ms  elapsed 2.5 min  eta 0.0 min
+
+== [01:29:31] x_sugi_setup: aliases, harness copy, contexts, containers, preflight for sugi
+wrote /home/<user>/.ssh/config.d/sshmf-sugi.conf
+$ ssh sshmf-sugi-ts true
+  sshmf-sugi-ts: OK
+$ ssh sshmf-sugi-lan true
+  sshmf-sugi-lan: FAIL ssh: connect to host <redacted-ip> port <ssh-port>: Connection timed out
+$ ssh sshmf-sugi-cm true
+  sshmf-sugi-cm: OK
+$ ssh sshmf-sugi-tuned true
+  sshmf-sugi-tuned: OK
+$ docker context create sshmf-sugi-ts --description SSH-MF ts path to sugi --docker host=ssh://sshmf-sugi-ts
+  sshmf-sugi-ts: server 28.0.4 on daemon host 'sugi'
+$ docker context create sshmf-sugi-lan --description SSH-MF lan path to sugi --docker host=ssh://sshmf-sugi-lan
+  sshmf-sugi-lan: FAIL error during connect: Get "http://docker.example.com/v1.54/version": command [ssh -o ConnectTimeout=30 -T -- sshmf-sugi-lan docker system dial-stdio] has exited with exit status 255, make sure the URL is valid, and Docker 18.09 or later is installed on the remote host: stderr=ssh: connect to host <redacted-ip> port <ssh-port>: Connection timed out
+$ docker context create sshmf-sugi-cm --description SSH-MF cm path to sugi --docker host=ssh://sshmf-sugi-cm
+  sshmf-sugi-cm: server 28.0.4 on daemon host 'sugi'
+$ docker context create sshmf-sugi-tuned --description SSH-MF tuned path to sugi --docker host=ssh://sshmf-sugi-tuned
+  sshmf-sugi-tuned: server 28.0.4 on daemon host 'sugi'
+$ docker --context sshmf-sugi-ts rm -f sshmf-probe sshmf-logs
+$ docker --context sshmf-sugi-ts run -d --name sshmf-probe --label sshmf=1 alpine:3.20 sleep infinity
+$ docker --context sshmf-sugi-ts run -d --name sshmf-logs --label sshmf=1 --log-driver json-file --log-opt max-size=2g --log-opt max-file=1 alpine:3.20 sh -c awk 'BEGIN{for(i=0;i<600000;i++) printf "%07d xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n", i}'; sleep infinity
+  sshmf-logs: 600000 lines x 100 B ready
+[PASS] not running as root                                        1007
+[PASS] ssh alias ts has no multiplexing                           controlmaster false
+[PASS] ssh alias cm multiplexes                                   controlmaster auto
+[PASS] context sshmf-sugi-ts reaches daemon 'sugi'                sugi
+[WARN] context sshmf-sugi-lan reaches daemon 'sugi' (optional)    error during connect: Get "http://docker.example.com/v1.54/info": command [ssh -o ConnectTimeout=30 -T -- sshm
+[PASS] context sshmf-sugi-cm reaches daemon 'sugi'                sugi
+[PASS] context sshmf-sugi-tuned reaches daemon 'sugi' (optional)  sugi
+[PASS] sugi: remote docker CLI uses context 'default'             default
+[PASS] local docker socket (curl)                                 OK
+[PASS] target: curl + docker socket (optional on observe-only)    OK
+[WARN] context sshmf-sugi-tls (optional, E4)                      Failed to initialize: unable to resolve docker endpoint: context "sshmf-sugi-tls": context not found: open /ho
+[PASS] target: python3 >= 3.11                                    3.11.2
+[PASS] target container sshmf-probe running                       true
+[PASS] target container sshmf-logs running                        true
+[PASS] tailscale path is direct                                   pong from sugi (<redacted-ip>) via <redacted-ip>:41641 in 1ms
+[PASS] local NTP synchronised                                     yes
+[PASS] target NTP synchronised                                    yes
+[PASS] target fail2ban inactive (E8 single)                       inactive
+[PASS] target sshd MaxStartups (default 10:30:100)                default
+[PASS] no netem active on tailscale0                              qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32
+[PASS] local load1 < 2                                            0.12 0.19 0.27 1/1440 4182063
+[PASS] target load1 < 2                                           0.04 0.05 0.01 1/644 3844201
+
+== [01:33:24] x_sugi_e1: E1 alpha decomposition (kiri -> sugi)
+e1: 6565 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e1/20261002-013324_kiri_to_sugi.csv
+  1/6565  ctx_inspect 248.8 ms  elapsed 0.0 min  eta 32.7 min
+  101/6565  tuned_ctx_ps 203.2 ms  elapsed 0.4 min  eta 24.4 min
+  201/6565  tuned_ssh_phases 147.1 ms  elapsed 0.8 min  eta 23.8 min
+  301/6565  local_cli_version 24.9 ms  elapsed 1.1 min  eta 23.3 min
+  401/6565  local_cli_version 29.1 ms  elapsed 1.5 min  eta 23.0 min
+  501/6565  tuned_ctx_ps 202.8 ms  elapsed 1.9 min  eta 22.6 min
+  601/6565  tuned_ssh_true 161.8 ms  elapsed 2.2 min  eta 22.3 min
+  701/6565  tuned_ssh_true 164.2 ms  elapsed 2.6 min  eta 21.9 min
+  801/6565  ctx_inspect 257.4 ms  elapsed 3.0 min  eta 21.5 min
+  901/6565  ssh_phases 208.1 ms  elapsed 3.4 min  eta 21.1 min
+  1001/6565  local_cli_version 25.5 ms  elapsed 3.7 min  eta 20.7 min
+  1101/6565  tuned_ssh_true 167.3 ms  elapsed 4.1 min  eta 20.4 min
+  1201/6565  local_api_ps 29.1 ms  elapsed 4.5 min  eta 20.0 min
+  1301/6565  ssh_true 226.9 ms  elapsed 4.9 min  eta 19.6 min
+  1401/6565  local_api_ps 26.6 ms  elapsed 5.2 min  eta 19.3 min
+  1501/6565  ssh_true 202.8 ms  elapsed 5.6 min  eta 18.9 min
+  1601/6565  local_api_ps 31.7 ms  elapsed 6.0 min  eta 18.5 min
+  1701/6565  local_api_ps 26.0 ms  elapsed 6.3 min  eta 18.1 min
+  1801/6565  ctx_version 258.2 ms  elapsed 6.7 min  eta 17.8 min
+  1901/6565  local_api_ps 24.1 ms  elapsed 7.1 min  eta 17.4 min
+  2001/6565  ssh_true 214.0 ms  elapsed 7.5 min  eta 17.0 min
+  2101/6565  local_cli_version 28.9 ms  elapsed 7.8 min  eta 16.6 min
+  2201/6565  local_cli_ps 45.0 ms  elapsed 8.2 min  eta 16.3 min
+  2301/6565  local_cli_ps 43.3 ms  elapsed 8.6 min  eta 15.9 min
+  2401/6565  local_cli_version 29.6 ms  elapsed 9.0 min  eta 15.5 min
+  2501/6565  ssh_true 210.0 ms  elapsed 9.3 min  eta 15.2 min
+  2601/6565  ssh_cli_version 226.8 ms  elapsed 9.7 min  eta 14.8 min
+  2701/6565  local_cli_ps 44.3 ms  elapsed 10.1 min  eta 14.4 min
+  2801/6565  ssh_api_ps 215.2 ms  elapsed 10.4 min  eta 14.0 min
+  2901/6565  local_cli_ps 44.2 ms  elapsed 10.8 min  eta 13.7 min
+  3001/6565  tuned_ctx_ps 204.2 ms  elapsed 11.2 min  eta 13.3 min
+  3101/6565  tuned_ctx_ps 200.0 ms  elapsed 11.6 min  eta 12.9 min
+  3201/6565  ctx_version 249.4 ms  elapsed 11.9 min  eta 12.5 min
+  3301/6565  ssh_api_ps 215.9 ms  elapsed 12.3 min  eta 12.2 min
+  3401/6565  local_cli_version 26.2 ms  elapsed 12.7 min  eta 11.8 min
+  3501/6565  tuned_ssh_phases 160.2 ms  elapsed 13.1 min  eta 11.4 min
+  3601/6565  ssh_true 215.4 ms  elapsed 13.4 min  eta 11.1 min
+  3701/6565  local_api_ps 27.4 ms  elapsed 13.8 min  eta 10.7 min
+  3801/6565  ssh_true 209.4 ms  elapsed 14.2 min  eta 10.3 min
+  3901/6565  ctx_version 240.6 ms  elapsed 14.5 min  eta 9.9 min
+  4001/6565  ctx_ps 244.5 ms  elapsed 14.9 min  eta 9.6 min
+  4101/6565  ctx_version 247.1 ms  elapsed 15.3 min  eta 9.2 min
+  4201/6565  tuned_ctx_ps 200.6 ms  elapsed 15.7 min  eta 8.8 min
+  4301/6565  ctx_version 247.3 ms  elapsed 16.0 min  eta 8.4 min
+  4401/6565  ssh_phases 209.8 ms  elapsed 16.4 min  eta 8.1 min
+  4501/6565  tuned_ssh_true 163.1 ms  elapsed 16.8 min  eta 7.7 min
+  4601/6565  local_api_ps 31.8 ms  elapsed 17.2 min  eta 7.3 min
+  4701/6565  local_cli_ps 47.6 ms  elapsed 17.5 min  eta 6.9 min
+  4801/6565  ctx_ps 237.0 ms  elapsed 17.9 min  eta 6.6 min
+  4901/6565  ctx_version 249.3 ms  elapsed 18.3 min  eta 6.2 min
+  5001/6565  local_cli_ps 41.8 ms  elapsed 18.6 min  eta 5.8 min
+  5101/6565  tuned_ssh_true 160.2 ms  elapsed 19.0 min  eta 5.5 min
+  5201/6565  local_cli_ps 44.5 ms  elapsed 19.4 min  eta 5.1 min
+  5301/6565  ssh_phases 213.4 ms  elapsed 19.8 min  eta 4.7 min
+  5401/6565  tuned_ssh_true 163.5 ms  elapsed 20.1 min  eta 4.3 min
+  5501/6565  ssh_true 215.5 ms  elapsed 20.5 min  eta 4.0 min
+  5601/6565  ssh_true 208.3 ms  elapsed 20.9 min  eta 3.6 min
+  5701/6565  local_cli_ps 44.4 ms  elapsed 21.3 min  eta 3.2 min
+  5801/6565  tuned_ssh_phases 160.2 ms  elapsed 21.6 min  eta 2.8 min
+  5901/6565  local_cli_ps 48.6 ms  elapsed 22.0 min  eta 2.5 min
+  6001/6565  tuned_ssh_phases 155.5 ms  elapsed 22.4 min  eta 2.1 min
+  6101/6565  ssh_true 212.6 ms  elapsed 22.8 min  eta 1.7 min
+  6201/6565  local_api_ps 29.1 ms  elapsed 23.1 min  eta 1.4 min
+  6301/6565  local_cli_ps 47.3 ms  elapsed 23.5 min  eta 1.0 min
+  6401/6565  local_cli_version 26.5 ms  elapsed 23.9 min  eta 0.6 min
+  6501/6565  local_api_ps 25.0 ms  elapsed 24.2 min  eta 0.2 min
+  6565/6565  local_api_ps 33.1 ms  elapsed 24.5 min  eta 0.0 min
+
+== [01:57:57] x_sugi_e1_local: E1 local baseline on sugi
+note: no curl on ume, raw-API conditions are skipped
+note: context sshmf-ume-tuned unreachable, its conditions are skipped
+e1: 2525 calls -> /home/<user>/sshmf-harness/data/raw/e1/20261002-105757_sugi_to_local.csv
+  1/2525  local_cli_version 18.9 ms  elapsed 0.0 min  eta 2.9 min
+  101/2525  local_cli_inspect 17.4 ms  elapsed 0.1 min  eta 2.6 min
+  201/2525  local_api_inspect 7.9 ms  elapsed 0.2 min  eta 2.5 min
+  301/2525  local_cli_version 18.6 ms  elapsed 0.3 min  eta 2.4 min
+  401/2525  local_cli_inspect 14.4 ms  elapsed 0.4 min  eta 2.3 min
+  501/2525  local_cli_version 21.8 ms  elapsed 0.5 min  eta 2.2 min
+  601/2525  local_api_ps 9.2 ms  elapsed 0.7 min  eta 2.1 min
+  701/2525  local_api_ps 8.8 ms  elapsed 0.8 min  eta 2.0 min
+  801/2525  local_api_ps 10.1 ms  elapsed 0.9 min  eta 1.9 min
+  901/2525  local_api_inspect 9.1 ms  elapsed 1.0 min  eta 1.8 min
+  1001/2525  local_api_inspect 8.1 ms  elapsed 1.1 min  eta 1.7 min
+  1101/2525  local_cli_version 21.2 ms  elapsed 1.2 min  eta 1.5 min
+  1201/2525  local_api_ps 12.0 ms  elapsed 1.3 min  eta 1.4 min
+  1301/2525  local_api_inspect 8.6 ms  elapsed 1.4 min  eta 1.3 min
+  1401/2525  local_cli_version 20.3 ms  elapsed 1.5 min  eta 1.2 min
+  1501/2525  local_cli_ps 18.7 ms  elapsed 1.6 min  eta 1.1 min
+  1601/2525  local_api_inspect 9.1 ms  elapsed 1.7 min  eta 1.0 min
+  1701/2525  local_cli_inspect 16.5 ms  elapsed 1.8 min  eta 0.9 min
+  1801/2525  local_cli_ps 19.0 ms  elapsed 2.0 min  eta 0.8 min
+  1901/2525  local_cli_inspect 17.6 ms  elapsed 2.1 min  eta 0.7 min
+  2001/2525  local_cli_version 20.8 ms  elapsed 2.2 min  eta 0.6 min
+  2101/2525  local_api_ps 9.5 ms  elapsed 2.3 min  eta 0.5 min
+  2201/2525  local_cli_ps 17.9 ms  elapsed 2.4 min  eta 0.4 min
+  2301/2525  local_cli_inspect 19.0 ms  elapsed 2.5 min  eta 0.2 min
+  2401/2525  local_cli_version 20.1 ms  elapsed 2.6 min  eta 0.1 min
+  2501/2525  local_cli_inspect 16.3 ms  elapsed 2.7 min  eta 0.0 min
+  2525/2525  local_api_inspect 7.6 ms  elapsed 2.7 min  eta 0.0 min
+
+== [02:00:42] x_sugi_e2: E2 phase absorption (kiri -> sugi)
+e2: 1860 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e2/20261002-020042_kiri_to_sugi.csv
+  1/1860  ctx_cli_stats 1284.5 ms  elapsed 0.0 min  eta 41.4 min
+  101/1860  ctx_cli_stats 1953.4 ms  elapsed 3.4 min  eta 58.6 min
+  201/1860  ssh_api_oneshot 222.8 ms  elapsed 3.9 min  eta 32.5 min
+  301/1860  ctx_cli_stats 1954.1 ms  elapsed 7.0 min  eta 36.3 min
+  401/1860  ssh_api_oneshot 225.4 ms  elapsed 7.9 min  eta 28.6 min
+  501/1860  ctx_cli_stats 1953.4 ms  elapsed 10.6 min  eta 28.9 min
+  601/1860  ssh_api_stats 1955.5 ms  elapsed 14.0 min  eta 29.3 min
+  701/1860  ssh_api_stats 1953.8 ms  elapsed 17.3 min  eta 28.6 min
+  801/1860  ssh_api_stats 1953.4 ms  elapsed 20.7 min  eta 27.3 min
+  901/1860  ssh_api_oneshot 220.2 ms  elapsed 22.2 min  eta 23.7 min
+  1001/1860  ctx_cli_stats 1247.7 ms  elapsed 23.9 min  eta 20.5 min
+  1101/1860  ctx_cli_stats 1259.4 ms  elapsed 26.5 min  eta 18.2 min
+  1201/1860  ssh_api_oneshot 224.6 ms  elapsed 29.0 min  eta 15.9 min
+  1301/1860  ssh_api_oneshot 221.6 ms  elapsed 31.6 min  eta 13.6 min
+  1401/1860  ssh_api_oneshot 226.0 ms  elapsed 34.2 min  eta 11.2 min
+  1501/1860  ssh_api_oneshot 219.6 ms  elapsed 36.7 min  eta 8.8 min
+  1601/1860  ssh_api_oneshot 223.6 ms  elapsed 39.3 min  eta 6.4 min
+  1701/1860  ssh_api_oneshot 225.7 ms  elapsed 41.9 min  eta 3.9 min
+  1801/1860  ssh_api_stats 1228.8 ms  elapsed 44.5 min  eta 1.5 min
+  1860/1860  ctx_cli_stats 1254.6 ms  elapsed 46.0 min  eta 0.0 min
+
+== [02:46:47] x_sugi_e2_local: E2 local baseline on sugi
+note: no curl on ume, raw-API conditions are skipped
+e2: 1860 calls -> /home/<user>/sshmf-harness/data/raw/e2/20261002-114648_sugi_to_local.csv
+  1/1860  local_cli_stats 1519.9 ms  elapsed 0.0 min  eta 48.6 min
+  101/1860  local_cli_stats 1954.5 ms  elapsed 3.4 min  eta 58.7 min
+  201/1860  local_api_oneshot 11.7 ms  elapsed 3.6 min  eta 29.7 min
+  301/1860  local_cli_stats 1954.2 ms  elapsed 6.6 min  eta 34.4 min
+  401/1860  local_api_oneshot 13.1 ms  elapsed 7.2 min  eta 26.2 min
+  501/1860  local_cli_stats 1954.3 ms  elapsed 9.9 min  eta 26.9 min
+  601/1860  local_api_stats 1954.0 ms  elapsed 13.3 min  eta 27.8 min
+  701/1860  local_api_stats 1954.0 ms  elapsed 16.6 min  eta 27.4 min
+  801/1860  local_api_stats 1953.5 ms  elapsed 19.9 min  eta 26.4 min
+  901/1860  local_api_oneshot 11.9 ms  elapsed 21.3 min  eta 22.7 min
+  1001/1860  local_cli_stats 1643.4 ms  elapsed 22.8 min  eta 19.6 min
+  1101/1860  local_cli_stats 1525.3 ms  elapsed 25.3 min  eta 17.4 min
+  1201/1860  local_api_oneshot 13.3 ms  elapsed 27.8 min  eta 15.2 min
+  1301/1860  local_api_oneshot 14.0 ms  elapsed 30.3 min  eta 13.0 min
+  1401/1860  local_api_oneshot 12.4 ms  elapsed 32.8 min  eta 10.7 min
+  1501/1860  local_api_oneshot 11.7 ms  elapsed 35.3 min  eta 8.5 min
+  1601/1860  local_api_oneshot 13.9 ms  elapsed 37.9 min  eta 6.1 min
+  1701/1860  local_api_oneshot 15.0 ms  elapsed 40.4 min  eta 3.8 min
+  1801/1860  local_api_stats 1013.9 ms  elapsed 42.9 min  eta 1.4 min
+  1860/1860  local_cli_stats 1525.8 ms  elapsed 44.4 min  eta 0.0 min
+
+== [03:31:15] x_sugi_e3: E3 tail (kiri -> sugi)
+e3: 4020 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e3/20261002-033115_kiri_to_sugi.csv
+  1/4020  ssh_true 209.6 ms  elapsed 0.0 min  eta 17.4 min
+  101/4020  ctx_inspect 245.8 ms  elapsed 0.5 min  eta 18.3 min
+  201/4020  ctx_ps 240.4 ms  elapsed 0.9 min  eta 17.9 min
+  301/4020  ssh_true 219.1 ms  elapsed 1.4 min  eta 17.4 min
+  401/4020  ssh_phases 213.6 ms  elapsed 1.9 min  eta 16.9 min
+  501/4020  ssh_true 203.7 ms  elapsed 2.3 min  eta 16.5 min
+  601/4020  ctx_inspect 240.0 ms  elapsed 2.8 min  eta 16.0 min
+  701/4020  ssh_phases 211.3 ms  elapsed 3.3 min  eta 15.5 min
+  801/4020  ctx_inspect 254.3 ms  elapsed 3.7 min  eta 15.1 min
+  901/4020  ctx_ps 252.6 ms  elapsed 4.2 min  eta 14.6 min
+  1001/4020  ctx_ps 262.9 ms  elapsed 4.7 min  eta 14.1 min
+  1101/4020  ssh_true 209.9 ms  elapsed 5.2 min  eta 13.7 min
+  1201/4020  ssh_true 205.2 ms  elapsed 5.6 min  eta 13.2 min
+  1301/4020  ssh_phases 205.0 ms  elapsed 6.1 min  eta 12.7 min
+  1401/4020  ctx_ps 251.0 ms  elapsed 6.6 min  eta 12.2 min
+  1501/4020  ctx_inspect 251.1 ms  elapsed 7.0 min  eta 11.8 min
+  1601/4020  ctx_ps 248.2 ms  elapsed 7.5 min  eta 11.3 min
+  1701/4020  ctx_ps 248.3 ms  elapsed 8.0 min  eta 10.8 min
+  1801/4020  ctx_ps 247.1 ms  elapsed 8.4 min  eta 10.4 min
+  1901/4020  ssh_phases 211.0 ms  elapsed 8.9 min  eta 9.9 min
+  2001/4020  ssh_phases 208.6 ms  elapsed 9.4 min  eta 9.4 min
+  2101/4020  ctx_ps 255.5 ms  elapsed 9.8 min  eta 9.0 min
+  2201/4020  ssh_phases 212.9 ms  elapsed 10.3 min  eta 8.5 min
+  2301/4020  ssh_true 208.8 ms  elapsed 10.8 min  eta 8.0 min
+  2401/4020  ctx_ps 258.5 ms  elapsed 11.2 min  eta 7.6 min
+  2501/4020  ctx_ps 259.3 ms  elapsed 11.7 min  eta 7.1 min
+  2601/4020  ssh_phases 207.4 ms  elapsed 12.2 min  eta 6.6 min
+  2701/4020  ssh_phases 213.0 ms  elapsed 12.6 min  eta 6.2 min
+  2801/4020  ctx_inspect 256.1 ms  elapsed 13.1 min  eta 5.7 min
+  2901/4020  ssh_phases 219.0 ms  elapsed 13.6 min  eta 5.2 min
+  3001/4020  ssh_true 224.1 ms  elapsed 14.0 min  eta 4.8 min
+  3101/4020  ctx_ps 257.0 ms  elapsed 14.5 min  eta 4.3 min
+  3201/4020  ssh_true 212.7 ms  elapsed 15.0 min  eta 3.8 min
+  3301/4020  ssh_phases 210.3 ms  elapsed 15.4 min  eta 3.4 min
+  3401/4020  ssh_true 208.4 ms  elapsed 15.9 min  eta 2.9 min
+  3501/4020  ssh_phases 215.6 ms  elapsed 16.4 min  eta 2.4 min
+  3601/4020  ssh_true 211.1 ms  elapsed 16.8 min  eta 2.0 min
+  3701/4020  ctx_ps 247.4 ms  elapsed 17.3 min  eta 1.5 min
+  3801/4020  ssh_true 218.0 ms  elapsed 17.8 min  eta 1.0 min
+  3901/4020  ssh_true 214.6 ms  elapsed 18.2 min  eta 0.6 min
+  4001/4020  ctx_ps 252.9 ms  elapsed 18.7 min  eta 0.1 min
+  4020/4020  ssh_true 212.7 ms  elapsed 18.8 min  eta 0.0 min
+
+== [03:50:06] x_sugi_e4: E4 transport paths (kiri -> sugi)
+note: context sshmf-sugi-lan unreachable, its conditions are skipped
+note: context sshmf-sugi-tls unreachable, its conditions are skipped
+e4: 3355 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e4/20261002-035011_kiri_to_sugi.csv
+  1/3355  cm_version 253.1 ms  elapsed 0.0 min  eta 17.0 min
+  101/3355  cm_version 45.9 ms  elapsed 0.3 min  eta 10.6 min
+  201/3355  ts_inspect 243.5 ms  elapsed 0.7 min  eta 10.3 min
+  301/3355  tuned_ps 202.5 ms  elapsed 1.0 min  eta 9.8 min
+  401/3355  ts_inspect 242.2 ms  elapsed 1.3 min  eta 9.6 min
+  501/3355  cm_ps 57.4 ms  elapsed 1.6 min  eta 9.2 min
+  601/3355  ts_inspect 255.0 ms  elapsed 1.9 min  eta 8.9 min
+  701/3355  cm_inspect 49.5 ms  elapsed 2.3 min  eta 8.6 min
+  801/3355  cm_ps 56.1 ms  elapsed 2.6 min  eta 8.3 min
+  901/3355  tuned_inspect 194.8 ms  elapsed 2.9 min  eta 7.9 min
+  1001/3355  tuned_ps 198.5 ms  elapsed 3.2 min  eta 7.6 min
+  1101/3355  tuned_ps 206.6 ms  elapsed 3.6 min  eta 7.3 min
+  1201/3355  cm_inspect 50.9 ms  elapsed 3.9 min  eta 7.0 min
+  1301/3355  ts_inspect 240.9 ms  elapsed 4.2 min  eta 6.7 min
+  1401/3355  tuned_ps 206.4 ms  elapsed 4.5 min  eta 6.3 min
+  1501/3355  ts_inspect 252.7 ms  elapsed 4.9 min  eta 6.0 min
+  1601/3355  ts_ps 236.0 ms  elapsed 5.2 min  eta 5.7 min
+  1701/3355  local_cli_version 26.7 ms  elapsed 5.5 min  eta 5.4 min
+  1801/3355  ts_inspect 252.5 ms  elapsed 5.8 min  eta 5.0 min
+  1901/3355  ts_inspect 256.7 ms  elapsed 6.2 min  eta 4.7 min
+  2001/3355  ts_ps 246.9 ms  elapsed 6.5 min  eta 4.4 min
+  2101/3355  tuned_inspect 198.9 ms  elapsed 6.8 min  eta 4.1 min
+  2201/3355  ts_ps 256.5 ms  elapsed 7.1 min  eta 3.7 min
+  2301/3355  local_cli_ps 43.0 ms  elapsed 7.4 min  eta 3.4 min
+  2401/3355  cm_ps 50.2 ms  elapsed 7.8 min  eta 3.1 min
+  2501/3355  ts_inspect 249.4 ms  elapsed 8.1 min  eta 2.8 min
+  2601/3355  ts_inspect 235.1 ms  elapsed 8.4 min  eta 2.4 min
+  2701/3355  ts_inspect 250.0 ms  elapsed 8.7 min  eta 2.1 min
+  2801/3355  tuned_inspect 213.2 ms  elapsed 9.1 min  eta 1.8 min
+  2901/3355  cm_ps 48.4 ms  elapsed 9.4 min  eta 1.5 min
+  3001/3355  ts_version 249.2 ms  elapsed 9.7 min  eta 1.1 min
+  3101/3355  tuned_ps 191.6 ms  elapsed 10.0 min  eta 0.8 min
+  3201/3355  cm_ps 55.1 ms  elapsed 10.4 min  eta 0.5 min
+  3301/3355  tuned_ps 201.1 ms  elapsed 10.7 min  eta 0.2 min
+  3355/3355  cm_ps 52.2 ms  elapsed 10.9 min  eta 0.0 min
+
+== [04:01:06] x_sugi_e5: E5 payload sweep (kiri -> sugi)
+e5: 740 calls -> /home/<user>/<user>/tem_ssh_experiment/execute_01/harness/data/raw/e5/20261002-040106_kiri_to_sugi.csv
+  1/740  cm_logs_50 50.1 ms  elapsed 0.0 min  eta 1.2 min
+  101/740  cm_logs_1000 66.7 ms  elapsed 1.9 min  eta 12.3 min
+  201/740  cm_logs_200 49.8 ms  elapsed 3.6 min  eta 9.7 min
+  301/740  ts_logs_100000 1312.7 ms  elapsed 5.5 min  eta 8.0 min
+  401/740  cm_logs_50000 584.4 ms  elapsed 7.3 min  eta 6.1 min
+  501/740  cm_logs_200 54.2 ms  elapsed 8.0 min  eta 3.8 min
+  601/740  cm_logs_200 56.1 ms  elapsed 8.6 min  eta 2.0 min
+  701/740  ts_logs_200 241.7 ms  elapsed 9.0 min  eta 0.5 min
+  740/740  cm_logs_10000 173.0 ms  elapsed 9.1 min  eta 0.0 min
+
+== [04:10:17] x_sugi_e5_local: E5 local baseline on sugi
+e5: 370 calls -> /home/<user>/sshmf-harness/data/raw/e5/20261002-131017_sugi_to_local.csv
+  1/370  local_logs_500000 2508.9 ms  elapsed 0.0 min  eta 15.7 min
+  101/370  local_logs_10000 61.2 ms  elapsed 0.8 min  eta 2.0 min
+  201/370  local_logs_100000 412.5 ms  elapsed 1.6 min  eta 1.3 min
+  301/370  local_logs_50 17.3 ms  elapsed 1.8 min  eta 0.4 min
+  370/370  local_logs_50 15.7 ms  elapsed 1.9 min  eta 0.0 min
+
+== [04:12:10] collect botan data
+
+== [04:12:11] collect keyaki data
+
+== [04:12:11] collect sugi data
+
+== [04:12:11] summaries (complete runs only)
+  e1 -> results/full_20261002-041211/summary_e1.txt
+  e2 -> results/full_20261002-041211/summary_e2.txt
+  e3 -> results/full_20261002-041211/summary_e3.txt
+  e4 -> results/full_20261002-041211/summary_e4.txt
+  e5 -> results/full_20261002-041211/summary_e5.txt
+  e7 -> results/full_20261002-041211/summary_e7.txt
+bundle: results/sshmf_full_20261002-041211.tar.gz
+
+== [04:12:35] done in 546 min
+all steps completed. Send me: results/sshmf_full_20261002-041211.tar.gz

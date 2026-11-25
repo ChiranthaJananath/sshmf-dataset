@@ -1,0 +1,52 @@
+{
+  "run_id": "20261002-145048",
+  "argv": [
+    "e9_controller.py",
+    "--variant",
+    "batch",
+    "--block",
+    "2",
+    "--hosts",
+    "ume,botan,keyaki,sugi",
+    "--minutes",
+    "10",
+    "--period",
+    "10",
+    "--fault-every",
+    "60"
+  ],
+  "hosts": [
+    "ume",
+    "botan",
+    "keyaki",
+    "sugi"
+  ],
+  "fake": false,
+  "start": {
+    "time_utc": "2026-10-02T14:50:50Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.37 0.18 0.14 1/1599 301886",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64"
+  },
+  "status": "complete",
+  "cycles": 60,
+  "controller_cpu_s": 2.94,
+  "end": {
+    "time_utc": "2026-10-02T15:00:50Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.02 0.04 0.07 1/1601 303611",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "run_id": "20261001-230926",
+  "exp": "e2",
+  "argv": [
+    "bench.py",
+    "e2",
+    "--target",
+    "keyaki"
+  ],
+  "seed": 20260929,
+  "modes": [
+    [
+      "closed",
+      "blocked",
+      3
+    ],
+    [
+      "random",
+      "interleaved",
+      1
+    ]
+  ],
+  "conditions": {
+    "ctx_cli_stats": "docker --context sshmf-keyaki-ts stats --no-stream sshmf-probe",
+    "ssh_api_stats": "ssh sshmf-keyaki-ts curl -sS --unix-socket /var/run/docker.sock 'http://localhost/containers/sshmf-probe/stats?stream=false'",
+    "ssh_api_oneshot": "ssh sshmf-keyaki-ts curl -sS --unix-socket /var/run/docker.sock 'http://localhost/containers/sshmf-probe/stats?stream=false&one-shot=true'"
+  },
+  "start": {
+    "time_utc": "2026-10-01T23:09:26Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.06 0.20 0.24 1/1431 4061423",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "keyaki",
+    "target_docker": "28.0.4",
+    "target_loadavg": "0.47 0.35 0.29 1/983 2614222",
+    "tailscale_ping": "pong from keyaki (<redacted-ip>) via <redacted-ip>:41641 in 1ms",
+    "clock_offset_ms_lower_bound": 11.45
+  },
+  "status": "complete",
+  "end": {
+    "time_utc": "2026-10-01T23:56:28Z",
+    "host": "kiri",
+    "docker": "29.5.2/29.5.2",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.16, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "loadavg": "0.02 0.03 0.04 1/1430 4077494",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+    "target": "keyaki",
+    "target_docker": "28.0.4",
+    "target_loadavg": "0.14 0.13 0.14 1/984 2635554",
+    "tailscale_ping": "pong from keyaki (<redacted-ip>) via <redacted-ip>:41641 in 1ms",
+    "clock_offset_ms_lower_bound": 15.34
+  }
+}

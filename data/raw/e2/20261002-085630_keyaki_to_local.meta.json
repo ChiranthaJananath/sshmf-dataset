@@ -1,0 +1,52 @@
+{
+  "run_id": "20261002-085630",
+  "exp": "e2",
+  "argv": [
+    "bench.py",
+    "e2",
+    "--local-only"
+  ],
+  "seed": 20260929,
+  "modes": [
+    [
+      "closed",
+      "blocked",
+      3
+    ],
+    [
+      "random",
+      "interleaved",
+      1
+    ]
+  ],
+  "conditions": {
+    "local_cli_stats": "docker --context default stats --no-stream sshmf-probe",
+    "local_api_stats": "curl -sS --unix-socket /var/run/docker.sock http://localhost/containers/sshmf-probe/stats?stream=false",
+    "local_api_oneshot": "curl -sS --unix-socket /var/run/docker.sock http://localhost/containers/sshmf-probe/stats?stream=false&one-shot=true"
+  },
+  "start": {
+    "time_utc": "2026-10-01T23:56:30Z",
+    "host": "keyaki",
+    "docker": "28.0.4/28.0.4",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.2p1 Debian-2+deb12u5, OpenSSL 3.0.15 3 Sep 2024",
+    "kernel": "6.1.0-32-amd64",
+    "loadavg": "0.14 0.13 0.14 2/986 2635617",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "/bin/sh: 1: tc: not found"
+  },
+  "status": "complete",
+  "end": {
+    "time_utc": "2026-10-02T00:41:04Z",
+    "host": "keyaki",
+    "docker": "28.0.4/28.0.4",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.2p1 Debian-2+deb12u5, OpenSSL 3.0.15 3 Sep 2024",
+    "kernel": "6.1.0-32-amd64",
+    "loadavg": "0.00 0.01 0.00 2/978 2643688",
+    "governor": "powersave",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "/bin/sh: 1: tc: not found"
+  }
+}

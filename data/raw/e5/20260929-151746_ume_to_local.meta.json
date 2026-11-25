@@ -1,0 +1,52 @@
+{
+  "run_id": "20260929-151746",
+  "exp": "e5",
+  "argv": [
+    "bench.py",
+    "e5",
+    "--local-only"
+  ],
+  "seed": 20260929,
+  "modes": [
+    [
+      "closed",
+      "interleaved",
+      1
+    ]
+  ],
+  "conditions": {
+    "local_logs_50": "docker --context default logs --tail 50 sshmf-logs",
+    "local_logs_200": "docker --context default logs --tail 200 sshmf-logs",
+    "local_logs_1000": "docker --context default logs --tail 1000 sshmf-logs",
+    "local_logs_5000": "docker --context default logs --tail 5000 sshmf-logs",
+    "local_logs_10000": "docker --context default logs --tail 10000 sshmf-logs",
+    "local_logs_50000": "docker --context default logs --tail 50000 sshmf-logs",
+    "local_logs_100000": "docker --context default logs --tail 100000 sshmf-logs",
+    "local_logs_500000": "docker --context default logs --tail 500000 sshmf-logs"
+  },
+  "start": {
+    "time_utc": "2026-09-29T15:17:46Z",
+    "host": "ume",
+    "docker": "29.3.1/29.3.1",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.19, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-124-generic",
+    "loadavg": "0.22 0.14 0.12 1/5324 506137",
+    "governor": "schedutil",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64"
+  },
+  "status": "complete",
+  "end": {
+    "time_utc": "2026-09-29T15:20:49Z",
+    "host": "ume",
+    "docker": "29.3.1/29.3.1",
+    "docker_current_context": "default",
+    "ssh": "OpenSSH_9.6p1 Ubuntu-3ubuntu13.19, OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-124-generic",
+    "loadavg": "4.19 2.26 0.97 1/5328 542087",
+    "governor": "schedutil",
+    "git": "fatal: not a git repository (or any of the parent directories): .git-dirty",
+    "qdisc_tailscale0": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1280 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64"
+  }
+}
